@@ -103,7 +103,7 @@
       "mitoCaller2vcf_version": "1.0.0",
       "mitocaller_docker_image": "ghcr.io/uclahs-cds/mitocaller:1.0.0",
       "mitocaller_version": "1.0.0",
-      "mt_ref_genome_dir": "/example/genome/mitochonria/",
+      "mt_ref_genome_dir": "/example/genome/mitochondria/",
       "mtoolbox_version": "1.2.1-b52269e",
       "output_dir": "/tmp/outputs",
       "output_dir_base": "/tmp/outputs/call-mtSNV-VER.SI.ON/sample id/mitoCaller-1.0.0/",
