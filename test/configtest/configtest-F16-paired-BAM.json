@@ -1,10 +1,9 @@
 {
   "nextflow_version": "23.10.0",
   "config": [
-    "test/global.config",
-    "test/input.config"
+    "config/template.config"
   ],
-  "params_file": "test/yaml/illumina/BAM/paired.yaml",
+  "params_file": "input/input-call-mtSNV-paired.yaml",
   "cpus": 16,
   "memory_gb": 31,
   "nf_params": {
