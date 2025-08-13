@@ -60,7 +60,7 @@ ___
 
 #### b. CRAM processing with SAMTools
 
-SAMTools is a suite of programs for interacting with high-throughput sequencing dat[<sup>3</sup>](#references). This pipeline uses the SAMTools View command to extract reads from CRAM files.
+SAMTools is a suite of programs for interacting with high-throughput sequencing data[<sup>3</sup>](#references). This pipeline uses the SAMTools View command to extract reads from CRAM files.
 
 ### 2. Align mtDNA with MToolBox
 ![flowchart_mtoolbox_overview](flowchart_mtoolbox_overview.png)
