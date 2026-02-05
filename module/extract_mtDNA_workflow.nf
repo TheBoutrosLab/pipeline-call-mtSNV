@@ -66,7 +66,7 @@ process extract_mtDNA_SAMtools {
 
     //logs
     ext log_dir_suffix: { "/${sample_name}" },
-        containerOptions: { cram_reference_genome -> "--volume ${cram_reference_genome}:${cram_reference_genome}"}(file(params.cram_reference_genome).getParent())
+        containerOptions: { cram_reference_genome -> "${params.container_mount_flag} ${cram_reference_genome}:${cram_reference_genome}"}(file(params.cram_reference_genome).getParent())
 
     input:
         tuple(

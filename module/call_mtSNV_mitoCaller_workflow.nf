@@ -66,7 +66,7 @@ process call_mtSNV_mitoCaller {
 
     //logs
     ext log_dir_suffix: { "/${sample_name}" },
-        containerOptions: { mt_ref_genome_dir -> "-v ${mt_ref_genome_dir}:/mitochondria-ref/"}(params.mt_ref_genome_dir)
+        containerOptions: { mt_ref_genome_dir -> "${params.container_mount_flag} ${mt_ref_genome_dir}:/mitochondria-ref/"}(params.mt_ref_genome_dir)
 
     input:
         tuple(
