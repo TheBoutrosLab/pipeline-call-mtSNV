@@ -91,7 +91,7 @@ process align_mtDNA_MToolBox {
 
     //logs
     ext log_dir_suffix: {"/${sample_name}"},
-        containerOptions: { gmapdb, mt_ref_genome_dir -> "--volume \"${gmapdb}:/src/gmapdb/\" --volume \"${mt_ref_genome_dir}:/src/genome_fasta/\""}(params.gmapdb, params.mt_ref_genome_dir)
+        containerOptions: { gmapdb, mt_ref_genome_dir -> "${params.container_mount_flag} \"${gmapdb}:/src/gmapdb/\" ${params.container_mount_flag} \"${mt_ref_genome_dir}:/src/genome_fasta/\""}(params.gmapdb, params.mt_ref_genome_dir)
 
     input:
         tuple(

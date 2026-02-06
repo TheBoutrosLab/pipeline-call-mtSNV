@@ -6,11 +6,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [unreleased]
+## [Unreleased]
 
 ### Added
-- tumor purity option for `call_heteroplasmy` process
----
+
+- Tumor purity option for `call_heteroplasmy` process
+- Add containerization profiles
+
+### Changed
+
+- Use `TheBoutrosLab` submodules
+
 ## [6.0.0-rc.1] - 2025-03-03
 
 ### Added
