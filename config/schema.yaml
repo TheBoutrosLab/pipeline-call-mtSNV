@@ -43,6 +43,11 @@ cram_reference_genome:
   mode: 'r'
   required: false
   help: 'Reference genome for CRAM validation'
+purity:
+  type: 'Number'
+  required: false
+  default: 1
+  help: 'Tumor purity for heteroplasmy calling'
 base_resource_update:
   type: 'ResourceUpdateNamespace'
   required: false
