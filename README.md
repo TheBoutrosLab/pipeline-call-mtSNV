@@ -1,6 +1,6 @@
 # Boutros Lab call-mtSNV pipeline
 
-[![Prepare release](https://img.shields.io/badge/Action-Create%20New%20Release-blue)](https://github.com/uclahs-cds/pipeline-call-mtSNV/actions/workflows/prepare-release.yaml)
+[![Prepare release](https://img.shields.io/badge/Action-Create%20New%20Release-blue)](https://github.com/theboutroslab/pipeline-call-mtSNV/actions/workflows/prepare-release.yaml)
 
 - [Boutros Lab call-mtSNV pipeline](#boutros-lab-call-mtsnv-pipeline)
   - [Overview](#overview)
@@ -219,7 +219,7 @@ Both WGS and WES aligned BAM files were used to test in single and tumor-normal 
 
 ### Running Tests with NFTest
 
-Ensure NFTest is installed on your system. If it is not installed follow installation instructions in the [NFTest documentation](https://github.com/uclahs-cds/tool-NFTest).
+Ensure NFTest is installed on your system. If it is not installed follow installation instructions in the [NFTest documentation](https://github.com/theboutroslab/tool-NFTest).
 
 To test annotators run the command with the annotator of interest:
 ```
@@ -229,11 +229,11 @@ nftest run [test-paired-01 test-single-normal-01 test-single-tumor-01 test-paire
 Additionally it is possible to modify the `nftest.yml` file to tune testing.
 All testing assets can be found in the `test/` directory.
 
-For larger jobs a [cluster submission tool](https://github.com/uclahs-cds/tool-submit-nf) is available for NFTest.
+For larger jobs a [cluster submission tool](https://github.com/theboutroslab/tool-submit-nf) is available for NFTest.
 
 ### Validation Tool
 
-Included is a template for validating your input files. For more information on the tool check out: https://github.com/uclahs-cds/tool-validate-nf
+Included is a template for validating your input files. For more information on the tool check out: https://github.com/theboutroslab/tool-validate-nf
 
 ---
 
@@ -250,14 +250,14 @@ Included is a template for validating your input files. For more information on 
 ---
 
 ## Discussions
-- [Issue tracker](https://github.com/uclahs-cds/pipeline-call-mtSNV/issues) to report errors and enhancement ideas.
-- Discussions can take place in [<pipeline> Discussions](https://github.com/uclahs-cds/pipeline-call-mtSNV/discussions)
-- [<pipeline> pull requests](https://github.com/uclahs-cds/pipeline-call-mtSNV/pulls) are also open for discussion
+- [Issue tracker](https://github.com/theboutroslab/pipeline-call-mtSNV/issues) to report errors and enhancement ideas.
+- Discussions can take place in [<pipeline> Discussions](https://github.com/theboutroslab/pipeline-call-mtSNV/discussions)
+- [<pipeline> pull requests](https://github.com/theboutroslab/pipeline-call-mtSNV/pulls) are also open for discussion
 
 ---
 
 ## Contributors
-Please see list of [Contributors](https://github.com/uclahs-cds/pipeline-call-mtSNV/graphs/contributors) at GitHub.
+Please see list of [Contributors](https://github.com/theboutroslab/pipeline-call-mtSNV/graphs/contributors) at GitHub.
 ---
 
 ## License
