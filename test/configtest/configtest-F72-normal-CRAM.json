@@ -35,6 +35,9 @@
     "timeline.file"
   ],
   "expected_result": {
+    "apptainer": {
+      "enabled": false
+    },
     "docker": {
       "all_group_ids": "$(for i in `id --real --groups`; do echo -n \"--group-add=$i \"; done)",
       "enabled": true,
@@ -60,6 +63,7 @@
       "cache_intermediate_pipeline_steps": false,
       "call_heteroplasmy_version": "1.1.0",
       "chrY_extraction_region": "57000000",
+      "container_mount_flag": "-v",
       "cram_reference_genome": "/hot/resource/reference-genome/GRCh38-BI-20160721/Homo_sapiens_assembly38.fasta",
       "dataset_id": "NFTEST",
       "date": "19970704T165655Z",
@@ -392,7 +396,7 @@
       },
       "withName:validate_input:run_validate_PipeVal": {
         "ext": {
-          "containerOptions": "--volume /hot/resource/reference-genome/GRCh38-BI-20160721:/hot/resource/reference-genome/GRCh38-BI-20160721"
+          "containerOptions": "-v /hot/resource/reference-genome/GRCh38-BI-20160721:/hot/resource/reference-genome/GRCh38-BI-20160721"
         }
       }
     },
