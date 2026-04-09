@@ -151,12 +151,8 @@ EOF
 
         export PATH="\$PWD/javawrapbin:\$PATH"
 
-        which java
-
         printf "input_type='bam'\nref='RSRS'\ninput_path=${bamql_out}\ngsnapdb=/src/gmapdb/\nfasta_path=/src/genome_fasta/\n" > config_'${bamql_out.baseName}'.conf
         MToolBox.sh -i config_'${bamql_out.baseName}'.conf -m '-t ${task.cpus}'
-
-        which java
 
         mv OUT_${bamql_out.baseName}/OUT2-sorted.bam ${output_filename_base}.bam
         """.stripIndent()
