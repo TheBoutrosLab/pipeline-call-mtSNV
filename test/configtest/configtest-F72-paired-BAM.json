@@ -57,7 +57,7 @@
     },
     "params": {
       "BAMQL_docker_image": "ghcr.io/uclahs-cds/bamql:1.6.1",
-      "MToolBox_docker_image": "ghcr.io/uclahs-cds/mtoolbox:1.2.1-b52269e",
+      "MToolBox_docker_image": "ghcr.io/theboutroslab/mtoolbox:1.2.1-b52269e_GSNAP-2023-12-01",
       "SAMtools_docker_image": "ghcr.io/uclahs-cds/samtools:1.21",
       "bamql_version": "1.6.1",
       "cache_intermediate_pipeline_steps": false,
@@ -75,7 +75,7 @@
       "downsample_strategy": "HighAccuracy",
       "downsample_validation_stringency": "LENIENT",
       "gmapdb": "/hot/resource/mitochondria_ref/gmapdb/gmapdb_2021-03-08",
-      "heteroplasmy_script_docker_image": "ghcr.io/uclahs-cds/call-heteroplasmy:1.1.0",
+      "heteroplasmy_script_docker_image": "ghcr.io/yashpatel6/call-heteroplasmy:1.1.0",
       "input": {
         "BAM": {
           "normal": {
@@ -120,7 +120,7 @@
       "mitocaller_docker_image": "ghcr.io/uclahs-cds/mitocaller:1.0.0",
       "mitocaller_version": "1.0.0",
       "mt_ref_genome_dir": "/hot/resource/mitochondria_ref/genome_fasta/",
-      "mtoolbox_version": "1.2.1-b52269e",
+      "mtoolbox_version": "1.2.1-b52269e_GSNAP-2023-12-01",
       "output_dir": "/tmp/outputs",
       "output_dir_base": "/tmp/outputs/call-mtSNV-VER.SI.ON/NA24143/mitoCaller-1.0.0/",
       "output_dir_prefix": "/tmp/outputs/call-mtSNV-VER.SI.ON/NA24143",
@@ -128,6 +128,7 @@
       "picard_docker_image": "ghcr.io/uclahs-cds/picard:3.3.0",
       "picard_version": "3.3.0",
       "pipeval_version": "5.0.0-rc.3",
+      "platform_set": "--platform linux/amd64",
       "probability_downsample": "0.5",
       "proc_resource_params": {
         "align_mtDNA_MToolBox": {
@@ -258,7 +259,7 @@
         "3": "3",
         "closure": "closure()"
       },
-      "echo": true,
+      "debug": false,
       "errorStrategy": {
         "1": "terminate",
         "2": "terminate",
