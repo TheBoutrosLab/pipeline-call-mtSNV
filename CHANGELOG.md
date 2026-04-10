@@ -12,6 +12,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 - Tumor purity option for `call_heteroplasmy` process
 - Add containerization profiles
+- Validation for purity when provided
 
 ### Changed
 
