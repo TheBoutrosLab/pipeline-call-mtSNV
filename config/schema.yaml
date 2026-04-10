@@ -146,6 +146,10 @@ input:
               mode: 'r'
               required: false
               help: 'Absolute path to tumor sample BAM'
+            purity:
+              type: 'PurityFloat'
+              required: false
+              help: 'Tumor purity'
     CRAM:
       type: 'InputBAMNamespace'
       required: false
@@ -179,3 +183,7 @@ input:
               mode: 'r'
               required: false
               help: 'Absolute path to tumor sample CRAM'
+            purity:
+              type: 'PurityFloat'
+              required: false
+              help: 'Tumor purity'
