@@ -91,7 +91,7 @@ process align_mtDNA_MToolBox {
 
     //logs
     ext log_dir_suffix: {"/${sample_name}"},
-        containerOptions: { gmapdb, mt_ref_genome_dir -> "${params.container_mount_flag} \"${gmapdb}:/src/gmapdb/\" ${params.container_mount_flag} \"${mt_ref_genome_dir}:/src/genome_fasta/\""}(params.gmapdb, params.mt_ref_genome_dir)
+        containerOptions: { gmapdb, mt_ref_genome_dir -> "${params.platform_set} ${params.container_mount_flag} \"${gmapdb}:/src/gmapdb/\" ${params.container_mount_flag} \"${mt_ref_genome_dir}:/src/genome_fasta/\""}(params.gmapdb, params.mt_ref_genome_dir)
 
     input:
         tuple(
@@ -124,11 +124,35 @@ process align_mtDNA_MToolBox {
             [:]
             )
         """
+        # Wrap java to add validation stringency argument to SortSam call to allow reads that map and extend off the end of a contig
+        mkdir -p javawrapbin
+
+        # Resolve the real java before modifying PATH
+        export REAL_JAVA=\$(command -v java)
+
+cat > javawrapbin/java <<'EOF'
+#!/usr/bin/env bash
+set -euo pipefail
+
+case "\$*" in
+*SortSam.jar*)
+    exec "\$REAL_JAVA" "\$@" VALIDATION_STRINGENCY=LENIENT
+    ;;
+*)
+    exec "\$REAL_JAVA" "\$@"
+    ;;
+esac
+EOF
+
+        chmod +x javawrapbin/java
+
+        export PATH="\$PWD/javawrapbin:\$PATH"
+
         printf "input_type='bam'\nref='RSRS'\ninput_path=${bamql_out}\ngsnapdb=/src/gmapdb/\nfasta_path=/src/genome_fasta/\n" > config_'${bamql_out.baseName}'.conf
         MToolBox.sh -i config_'${bamql_out.baseName}'.conf -m '-t ${task.cpus}'
 
         mv OUT_${bamql_out.baseName}/OUT2-sorted.bam ${output_filename_base}.bam
-        """
+        """.stripIndent()
 }
 
 process downsample_BAM_Picard {
