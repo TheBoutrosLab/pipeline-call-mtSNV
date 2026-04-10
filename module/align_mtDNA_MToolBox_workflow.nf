@@ -128,13 +128,11 @@ process align_mtDNA_MToolBox {
         mkdir -p javawrapbin
 
         # Resolve the real java before modifying PATH
-        REAL_JAVA=\$(command -v java)
+        export REAL_JAVA=\$(command -v java)
 
 cat > javawrapbin/java <<'EOF'
 #!/usr/bin/env bash
 set -euo pipefail
-
-REAL_JAVA="__REAL_JAVA__"
 
 case "\$*" in
 *SortSam.jar*)
@@ -146,7 +144,6 @@ case "\$*" in
 esac
 EOF
 
-        sed -i "s|__REAL_JAVA__|\$REAL_JAVA|g" javawrapbin/java
         chmod +x javawrapbin/java
 
         export PATH="\$PWD/javawrapbin:\$PATH"
