@@ -60,6 +60,40 @@
       "MToolBox_docker_image": "ghcr.io/theboutroslab/mtoolbox:1.2.1-b52269e_GSNAP-2023-12-01",
       "SAMtools_docker_image": "ghcr.io/uclahs-cds/samtools:1.21",
       "bamql_version": "1.6.1",
+      "base_allocations": {
+        "align_mtDNA_MToolBox": {
+          "cpus": "6",
+          "memory": "35 GB"
+        },
+        "call_heteroplasmy": {
+          "cpus": "2",
+          "memory": "2 GB"
+        },
+        "call_mtSNV_mitoCaller": {
+          "cpus": "1",
+          "memory": "2 GB"
+        },
+        "convert_mitoCaller2vcf_mitoCaller": {
+          "cpus": "2",
+          "memory": "10 GB"
+        },
+        "downsample_BAM_Picard": {
+          "cpus": "1",
+          "memory": "10 GB"
+        },
+        "extract_mtDNA_BAMQL": {
+          "cpus": "1",
+          "memory": "2 GB"
+        },
+        "extract_mtDNA_SAMtools": {
+          "cpus": "1",
+          "memory": "8 GB"
+        },
+        "run_validate_PipeVal": {
+          "cpus": "1",
+          "memory": "2 GB"
+        }
+      },
       "cache_intermediate_pipeline_steps": false,
       "call_heteroplasmy_version": "1.1.0",
       "chrY_extraction_region": "57000000",
@@ -103,8 +137,10 @@
       "log_output_dir": "/tmp/outputs/call-mtSNV-VER.SI.ON/NA24143/log-call-mtSNV-VER.SI.ON-19970704T165655Z",
       "max_cpus": "72",
       "max_memory": "136 GB",
+      "max_time": "24d 20h 31m 24s",
       "min_cpus": "1",
       "min_memory": "1 MB",
+      "min_time": "1s",
       "mitoCaller2vcf_docker_image": "ghcr.io/uclahs-cds/mitocaller2vcf:1.0.0",
       "mitoCaller2vcf_version": "1.0.0",
       "mitocaller_docker_image": "ghcr.io/uclahs-cds/mitocaller:1.0.0",
@@ -120,93 +156,52 @@
       "pipeval_version": "5.0.0-rc.3",
       "platform_set": "--platform linux/amd64",
       "probability_downsample": "0.5",
-      "proc_resource_params": {
+      "purity": "1.0",
+      "reference_genome_version": "GRCh38",
+      "retry_information": {
         "align_mtDNA_MToolBox": {
-          "cpus": "6",
-          "ext": {
-            "retry_codes": []
-          },
-          "memory": "35 GB",
-          "retry_strategy": {
-            "memory": {
-              "operand": "2",
-              "strategy": "exponential"
-            }
+          "memory": {
+            "operand": "2",
+            "strategy": "exponential"
           }
         },
         "call_heteroplasmy": {
-          "cpus": "2",
-          "memory": "2 GB",
-          "retry_strategy": {
-            "memory": {
-              "operand": "3",
-              "strategy": "exponential"
-            }
+          "memory": {
+            "operand": "3",
+            "strategy": "exponential"
           }
         },
         "call_mtSNV_mitoCaller": {
-          "cpus": "1",
-          "ext": {
-            "retry_codes": []
-          },
-          "memory": "2 GB",
-          "retry_strategy": {
-            "memory": {
-              "operand": "3",
-              "strategy": "exponential"
-            }
+          "memory": {
+            "operand": "3",
+            "strategy": "exponential"
           }
         },
         "convert_mitoCaller2vcf_mitoCaller": {
-          "cpus": "2",
-          "ext": {
-            "retry_codes": []
-          },
-          "memory": "10 GB",
-          "retry_strategy": {
-            "memory": {
-              "operand": "2",
-              "strategy": "exponential"
-            }
+          "memory": {
+            "operand": "2",
+            "strategy": "exponential"
           }
         },
         "downsample_BAM_Picard": {
-          "cpus": "1",
-          "memory": "10 GB",
-          "retry_strategy": {
-            "memory": {
-              "operand": "3",
-              "strategy": "exponential"
-            }
+          "memory": {
+            "operand": "3",
+            "strategy": "exponential"
           }
         },
         "extract_mtDNA_BAMQL": {
-          "cpus": "1",
-          "memory": "2 GB",
-          "retry_strategy": {
-            "memory": {
-              "operand": "3",
-              "strategy": "exponential"
-            }
+          "memory": {
+            "operand": "3",
+            "strategy": "exponential"
           }
         },
         "extract_mtDNA_SAMtools": {
-          "cpus": "1",
-          "memory": "8 GB",
-          "retry_strategy": {
-            "memory": {
-              "operand": "3",
-              "strategy": "exponential"
-            }
+          "memory": {
+            "operand": "3",
+            "strategy": "exponential"
           }
-        },
-        "run_validate_PipeVal": {
-          "cpus": "1",
-          "memory": "2 GB"
         }
       },
-      "purity": "1.0",
-      "reference_genome_version": "GRCh38",
       "sample_id": "NA24143",
       "sample_mode": "single",
       "samtools_version": "1.21",
@@ -399,6 +394,12 @@
     "report": {
       "enabled": true,
       "file": "/tmp/outputs/call-mtSNV-VER.SI.ON/NA24143/log-call-mtSNV-VER.SI.ON-19970704T165655Z/nextflow-log/report.html"
+    },
+    "resource_handler": {
+      "handle_resources": "closure()",
+      "set_resource_limit_params": "closure()",
+      "set_retry": "closure()",
+      "setup_retry": "closure()"
     },
     "timeline": {
       "enabled": true,
