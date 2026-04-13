@@ -1,0 +1,702 @@
+{
+    "f16": {
+        "run_validate_PipeVal": {
+            "cpus": {
+                "min": 1,
+                "fraction": 0.06,
+                "max": 1
+            },
+            "memory": {
+                "min": "2 GB",
+                "fraction": 0.07,
+                "max": "2 GB"
+            }
+        },
+        "extract_mtDNA_BAMQL": {
+            "cpus": {
+                "min": 1,
+                "fraction": 0.06,
+                "max": 1
+            },
+            "memory": {
+                "min": "2 GB",
+                "fraction": 0.07,
+                "max": "2 GB"
+            },
+            "retry_strategy": {
+                "memory": {
+                    "strategy": "exponential",
+                    "operand": 3
+                }
+            }
+        },
+        "extract_mtDNA_SAMtools": {
+            "cpus": {
+                "min": 1,
+                "fraction": 0.06,
+                "max": 1
+            },
+            "memory": {
+                "min": "8 GB",
+                "fraction": 0.26,
+                "max": "8 GB"
+            },
+            "retry_strategy": {
+                "memory": {
+                    "strategy": "exponential",
+                    "operand": 3
+                }
+            }
+        },
+        "align_mtDNA_MToolBox": {
+            "cpus": {
+                "min": 6,
+                "fraction": 0.38,
+                "max": 6
+            },
+            "memory": {
+                "min": "20 GB",
+                "fraction": 0.66,
+                "max": "20 GB"
+            },
+            "retry_strategy": {
+                "memory": {
+                    "strategy": "add",
+                    "operand": "12 GB"
+                }
+            }
+        },
+        "downsample_BAM_Picard": {
+            "cpus": {
+                "min": 1,
+                "fraction": 0.06,
+                "max": 1
+            },
+            "memory": {
+                "min": "6 GB",
+                "fraction": 0.20,
+                "max": "6 GB"
+            },
+            "retry_strategy": {
+                "memory": {
+                    "strategy": "exponential",
+                    "operand": 3
+                }
+            }
+        },
+        "call_mtSNV_mitoCaller": {
+            "cpus": {
+                "min": 1,
+                "fraction": 0.06,
+                "max": 1
+            },
+            "memory": {
+                "min": "2 GB",
+                "fraction": 0.07,
+                "max": "2 GB"
+            },
+            "retry_strategy": {
+                "memory": {
+                    "strategy": "exponential",
+                    "operand": 3
+                }
+            }
+        },
+        "convert_mitoCaller2vcf_mitoCaller": {
+            "cpus": {
+                "min": 2,
+                "fraction": 0.13,
+                "max": 2
+            },
+            "memory": {
+                "min": "10 GB",
+                "fraction": 0.33,
+                "max": "10 GB"
+            },
+            "retry_strategy": {
+                "memory": {
+                    "strategy": "add",
+                    "operand": "5 GB"
+                }
+            }
+        },
+        "call_heteroplasmy": {
+            "cpus": {
+                "min": 2,
+                "fraction": 0.13,
+                "max": 2
+            },
+            "memory": {
+                "min": "2 GB",
+                "fraction": 0.07,
+                "max": "2 GB"
+            },
+            "retry_strategy": {
+                "memory": {
+                    "strategy": "exponential",
+                    "operand": 3
+                }
+            }
+        }
+    },
+    "f32": {
+        "run_validate_PipeVal": {
+            "cpus": {
+                "min": 1,
+                "fraction": 0.03,
+                "max": 1
+            },
+            "memory": {
+                "min": "2 GB",
+                "fraction": 0.03,
+                "max": "2 GB"
+            }
+        },
+        "extract_mtDNA_BAMQL": {
+            "cpus": {
+                "min": 1,
+                "fraction": 0.03,
+                "max": 1
+            },
+            "memory": {
+                "min": "2 GB",
+                "fraction": 0.03,
+                "max": "2 GB"
+            },
+            "retry_strategy": {
+                "memory": {
+                    "strategy": "exponential",
+                    "operand": 3
+                }
+            }
+        },
+        "extract_mtDNA_SAMtools": {
+            "cpus": {
+                "min": 1,
+                "fraction": 0.03,
+                "max": 1
+            },
+            "memory": {
+                "min": "8 GB",
+                "fraction": 0.13,
+                "max": "8 GB"
+            },
+            "retry_strategy": {
+                "memory": {
+                    "strategy": "exponential",
+                    "operand": 3
+                }
+            }
+        },
+        "align_mtDNA_MToolBox": {
+            "cpus": {
+                "min": 6,
+                "fraction": 0.19,
+                "max": 6
+            },
+            "memory": {
+                "min": "32 GB",
+                "fraction": 0.53,
+                "max": "32 GB"
+            },
+            "retry_strategy": {
+                "memory": {
+                    "strategy": "exponential",
+                    "operand": 2
+                }
+            }
+        },
+        "downsample_BAM_Picard": {
+            "cpus": {
+                "min": 1,
+                "fraction": 0.03,
+                "max": 1
+            },
+            "memory": {
+                "min": "6 GB",
+                "fraction": 0.10,
+                "max": "6 GB"
+            },
+            "retry_strategy": {
+                "memory": {
+                    "strategy": "exponential",
+                    "operand": 3
+                }
+            }
+        },
+        "call_mtSNV_mitoCaller": {
+            "cpus": {
+                "min": 1,
+                "fraction": 0.03,
+                "max": 1
+            },
+            "memory": {
+                "min": "2 GB",
+                "fraction": 0.03,
+                "max": "2 GB"
+            },
+            "retry_strategy": {
+                "memory": {
+                    "strategy": "exponential",
+                    "operand": 3
+                }
+            }
+        },
+        "convert_mitoCaller2vcf_mitoCaller": {
+            "cpus": {
+                "min": 2,
+                "fraction": 0.06,
+                "max": 2
+            },
+            "memory": {
+                "min": "10 GB",
+                "fraction": 0.16,
+                "max": "10 GB"
+            },
+            "retry_strategy": {
+                "memory": {
+                    "strategy": "exponential",
+                    "operand": 2
+                }
+            }
+        },
+        "call_heteroplasmy": {
+            "cpus": {
+                "min": 2,
+                "fraction": 0.06,
+                "max": 2
+            },
+            "memory": {
+                "min": "2 GB",
+                "fraction": 0.03,
+                "max": "2 GB"
+            },
+            "retry_strategy": {
+                "memory": {
+                    "strategy": "exponential",
+                    "operand": 3
+                }
+            }
+        }
+    },
+    "f72": {
+        "run_validate_PipeVal": {
+            "cpus": {
+                "min": 1,
+                "fraction": 0.01,
+                "max": 1
+            },
+            "memory": {
+                "min": "2 GB",
+                "fraction": 0.01,
+                "max": "2 GB"
+            }
+        },
+        "extract_mtDNA_BAMQL": {
+            "cpus": {
+                "min": 1,
+                "fraction": 0.01,
+                "max": 1
+            },
+            "memory": {
+                "min": "2 GB",
+                "fraction": 0.01,
+                "max": "2 GB"
+            },
+            "retry_strategy": {
+                "memory": {
+                    "strategy": "exponential",
+                    "operand": 3
+                }
+            }
+        },
+        "extract_mtDNA_SAMtools": {
+            "cpus": {
+                "min": 1,
+                "fraction": 0.01,
+                "max": 1
+            },
+            "memory": {
+                "min": "8 GB",
+                "fraction": 0.06,
+                "max": "8 GB"
+            },
+            "retry_strategy": {
+                "memory": {
+                    "strategy": "exponential",
+                    "operand": 3
+                }
+            }
+        },
+        "align_mtDNA_MToolBox": {
+            "cpus": {
+                "min": 6,
+                "fraction": 0.08,
+                "max": 6
+            },
+            "memory": {
+                "min": "35 GB",
+                "fraction": 0.26,
+                "max": "35 GB"
+            },
+            "retry_strategy": {
+                "memory": {
+                    "strategy": "exponential",
+                    "operand": 2
+                }
+            }
+        },
+        "downsample_BAM_Picard": {
+            "cpus": {
+                "min": 1,
+                "fraction": 0.01,
+                "max": 1
+            },
+            "memory": {
+                "min": "10 GB",
+                "fraction": 0.07,
+                "max": "10 GB"
+            },
+            "retry_strategy": {
+                "memory": {
+                    "strategy": "exponential",
+                    "operand": 3
+                }
+            }
+        },
+        "call_mtSNV_mitoCaller": {
+            "cpus": {
+                "min": 1,
+                "fraction": 0.01,
+                "max": 1
+            },
+            "memory": {
+                "min": "2 GB",
+                "fraction": 0.01,
+                "max": "2 GB"
+            },
+            "retry_strategy": {
+                "memory": {
+                    "strategy": "exponential",
+                    "operand": 3
+                }
+            }
+        },
+        "convert_mitoCaller2vcf_mitoCaller": {
+            "cpus": {
+                "min": 2,
+                "fraction": 0.03,
+                "max": 2
+            },
+            "memory": {
+                "min": "10 GB",
+                "fraction": 0.07,
+                "max": "10 GB"
+            },
+            "retry_strategy": {
+                "memory": {
+                    "strategy": "exponential",
+                    "operand": 2
+                }
+            }
+        },
+        "call_heteroplasmy": {
+            "cpus": {
+                "min": 2,
+                "fraction": 0.03,
+                "max": 2
+            },
+            "memory": {
+                "min": "2 GB",
+                "fraction": 0.01,
+                "max": "2 GB"
+            },
+            "retry_strategy": {
+                "memory": {
+                    "strategy": "exponential",
+                    "operand": 3
+                }
+            }
+        }
+    },
+    "m64": {
+        "run_validate_PipeVal": {
+            "cpus": {
+                "min": 1,
+                "fraction": 0.02,
+                "max": 1
+            },
+            "memory": {
+                "min": "2 GB",
+                "fraction": 0.00,
+                "max": "2 GB"
+            }
+        },
+        "extract_mtDNA_BAMQL": {
+            "cpus": {
+                "min": 1,
+                "fraction": 0.02,
+                "max": 1
+            },
+            "memory": {
+                "min": "2 GB",
+                "fraction": 0.00,
+                "max": "2 GB"
+            },
+            "retry_strategy": {
+                "memory": {
+                    "strategy": "exponential",
+                    "operand": 3
+                }
+            }
+        },
+        "extract_mtDNA_SAMtools": {
+            "cpus": {
+                "min": 1,
+                "fraction": 0.02,
+                "max": 1
+            },
+            "memory": {
+                "min": "8 GB",
+                "fraction": 0.01,
+                "max": "8 GB"
+            },
+            "retry_strategy": {
+                "memory": {
+                    "strategy": "exponential",
+                    "operand": 3
+                }
+            }
+        },
+        "align_mtDNA_MToolBox": {
+            "cpus": {
+                "min": 4,
+                "fraction": 0.06,
+                "max": 4
+            },
+            "memory": {
+                "min": "40 GB",
+                "fraction": 0.04,
+                "max": "40 GB"
+            },
+            "retry_strategy": {
+                "memory": {
+                    "strategy": "exponential",
+                    "operand": 2
+                }
+            }
+        },
+        "downsample_BAM_Picard": {
+            "cpus": {
+                "min": 1,
+                "fraction": 0.02,
+                "max": 1
+            },
+            "memory": {
+                "min": "10 GB",
+                "fraction": 0.01,
+                "max": "10 GB"
+            },
+            "retry_strategy": {
+                "memory": {
+                    "strategy": "exponential",
+                    "operand": 3
+                }
+            }
+        },
+        "call_mtSNV_mitoCaller": {
+            "cpus": {
+                "min": 1,
+                "fraction": 0.02,
+                "max": 1
+            },
+            "memory": {
+                "min": "2 GB",
+                "fraction": 0.00,
+                "max": "2 GB"
+            },
+            "retry_strategy": {
+                "memory": {
+                    "strategy": "exponential",
+                    "operand": 3
+                }
+            }
+        },
+        "convert_mitoCaller2vcf_mitoCaller": {
+            "cpus": {
+                "min": 2,
+                "fraction": 0.03,
+                "max": 2
+            },
+            "memory": {
+                "min": "10 GB",
+                "fraction": 0.01,
+                "max": "10 GB"
+            },
+            "retry_strategy": {
+                "memory": {
+                    "strategy": "exponential",
+                    "operand": 2
+                }
+            }
+        },
+        "call_heteroplasmy": {
+            "cpus": {
+                "min": 2,
+                "fraction": 0.03,
+                "max": 2
+            },
+            "memory": {
+                "min": "2 GB",
+                "fraction": 0.00,
+                "max": "2 GB"
+            },
+            "retry_strategy": {
+                "memory": {
+                    "strategy": "exponential",
+                    "operand": 3
+                }
+            }
+        }
+    },
+    "default": {
+        "run_validate_PipeVal": {
+            "cpus": {
+                "min": 1,
+                "fraction": 0.01,
+                "max": 1
+            },
+            "memory": {
+                "min": "1 GB",
+                "fraction": 0.01,
+                "max": "2 GB"
+            }
+        },
+        "extract_mtDNA_BAMQL": {
+            "cpus": {
+                "min": 1,
+                "fraction": 0.01,
+                "max": 1
+            },
+            "memory": {
+                "min": "2 GB",
+                "fraction": 0.01,
+                "max": "8 GB"
+            },
+            "retry_strategy": {
+                "memory": {
+                    "strategy": "exponential",
+                    "operand": 3
+                }
+            }
+        },
+        "extract_mtDNA_SAMtools": {
+            "cpus": {
+                "min": 1,
+                "fraction": 0.01,
+                "max": 1
+            },
+            "memory": {
+                "min": "4 GB",
+                "fraction": 0.06,
+                "max": "16 GB"
+            },
+            "retry_strategy": {
+                "memory": {
+                    "strategy": "exponential",
+                    "operand": 3
+                }
+            }
+        },
+        "align_mtDNA_MToolBox": {
+            "cpus": {
+                "min": 6,
+                "fraction": 0.08,
+                "max": 6
+            },
+            "memory": {
+                "min": "35 GB",
+                "fraction": 0.26,
+                "max": "128 GB"
+            },
+            "retry_strategy": {
+                "memory": {
+                    "strategy": "exponential",
+                    "operand": 2
+                }
+            }
+        },
+        "downsample_BAM_Picard": {
+            "cpus": {
+                "min": 1,
+                "fraction": 0.01,
+                "max": 1
+            },
+            "memory": {
+                "min": "6 GB",
+                "fraction": 0.07,
+                "max": "24 GB"
+            },
+            "retry_strategy": {
+                "memory": {
+                    "strategy": "exponential",
+                    "operand": 3
+                }
+            }
+        },
+        "call_mtSNV_mitoCaller": {
+            "cpus": {
+                "min": 1,
+                "fraction": 0.01,
+                "max": 1
+            },
+            "memory": {
+                "min": "2 GB",
+                "fraction": 0.01,
+                "max": "16 GB"
+            },
+            "retry_strategy": {
+                "memory": {
+                    "strategy": "exponential",
+                    "operand": 3
+                }
+            }
+        },
+        "convert_mitoCaller2vcf_mitoCaller": {
+            "cpus": {
+                "min": 2,
+                "fraction": 0.03,
+                "max": 2
+            },
+            "memory": {
+                "min": "6 GB",
+                "fraction": 0.07,
+                "max": "32 GB"
+            },
+            "retry_strategy": {
+                "memory": {
+                    "strategy": "exponential",
+                    "operand": 2
+                }
+            }
+        },
+        "call_heteroplasmy": {
+            "cpus": {
+                "min": 2,
+                "fraction": 0.03,
+                "max": 2
+            },
+            "memory": {
+                "min": "2 GB",
+                "fraction": 0.01,
+                "max": "8 GB"
+            },
+            "retry_strategy": {
+                "memory": {
+                    "strategy": "exponential",
+                    "operand": 3
+                }
+            }
+        }
+    }
+}
