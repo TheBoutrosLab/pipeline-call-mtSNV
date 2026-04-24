@@ -58,7 +58,7 @@
     "params": {
       "BAMQL_docker_image": "ghcr.io/uclahs-cds/bamql:1.6.1",
       "MToolBox_docker_image": "ghcr.io/theboutroslab/mtoolbox:1.2.1-b52269e_GSNAP-2023-12-01",
-      "SAMtools_docker_image": "ghcr.io/uclahs-cds/samtools:1.21",
+      "SAMtools_docker_image": "ghcr.io/theboutroslab/samtools:1.23",
       "bamql_version": "1.6.1",
       "base_allocations": {
         "align_mtDNA_MToolBox": {
@@ -101,7 +101,8 @@
       "cram_reference_genome": "/hot/resource/reference-genome/GRCh38-BI-20160721/Homo_sapiens_assembly38.fasta",
       "dataset_id": "NFTEST",
       "date": "19970704T165655Z",
-      "docker_container_registry": "ghcr.io/uclahs-cds",
+      "docker_container_registry_theboutroslab": "ghcr.io/theboutroslab",
+      "docker_container_registry_uclahscds": "ghcr.io/uclahs-cds",
       "downsample_accuracy": "1.0E-4",
       "downsample_index": true,
       "downsample_mtoolbox_bam": false,
@@ -151,8 +152,8 @@
       "output_dir_base": "/tmp/outputs/call-mtSNV-VER.SI.ON/NA24149/mitoCaller-1.0.0/",
       "output_dir_prefix": "/tmp/outputs/call-mtSNV-VER.SI.ON/NA24149",
       "patient_id": "illumina",
-      "picard_docker_image": "ghcr.io/uclahs-cds/picard:3.3.0",
-      "picard_version": "3.3.0",
+      "picard_docker_image": "ghcr.io/theboutroslab/picard:3.4.0",
+      "picard_version": "3.4.0",
       "pipeval_version": "5.0.0-rc.3",
       "platform_set": "--platform linux/amd64",
       "probability_downsample": "0.5",
@@ -204,7 +205,7 @@
       },
       "sample_id": "NA24149",
       "sample_mode": "single",
-      "samtools_version": "1.21",
+      "samtools_version": "1.23",
       "save_intermediate_files": false,
       "ucla_cds": true,
       "validate_extra_args": "-r /hot/resource/reference-genome/GRCh38-BI-20160721/Homo_sapiens_assembly38.fasta",

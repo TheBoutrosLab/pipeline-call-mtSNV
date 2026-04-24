@@ -11,6 +11,7 @@ include { run_index_SAMtools } from '../external/pipeline-Nextflow-module/module
     options: [
         output_dir: "${params.output_dir_base}/output",
         docker_image_version: params.samtools_version,
+        docker_image: params.SAMtools_docker_image,
         main_process: "./"
     ]
 )
@@ -197,7 +198,7 @@ process downsample_BAM_Picard {
             [:]
             )
         """
-        java -jar /usr/local/share/picard-slim-${params.picard_version}-0/picard.jar \
+        java -jar /opt/conda/envs/picard/share/picard-slim-${params.picard_version}-0/picard.jar \
         DownsampleSam \
             INPUT=$mtoolbox_out \
             OUTPUT=${output_filename_base}_downsampled.bam \
