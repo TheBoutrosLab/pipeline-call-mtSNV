@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [6.0.0] - 2026-04-24
 
 ### Added
 
@@ -186,15 +186,16 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 - #53: Update resource allocation to newest standard
 - #39: Group output files in align_mtDNA: "\*.{txt,conf,csv,vcf,gz}"
 
-[1.0.0]: https://github.com/uclahs-cds/pipeline-call-mtSNV/compare/v1.0.0-rc1...v1.0.0
-[1.0.0-rc1]: https://github.com/uclahs-cds/pipeline-call-mtSNV/releases/tag/v1.0.0-rc1
-[2.0.0]: https://github.com/uclahs-cds/pipeline-call-mtSNV/compare/v1.0.0...v2.0.0
-[3.0.0]: https://github.com/uclahs-cds/pipeline-call-mtSNV/compare/v3.0.0-rc.1...v3.0.0
-[3.0.0-rc.1]: https://github.com/uclahs-cds/pipeline-call-mtSNV/compare/v2.0.0...v3.0.0-rc.1
-[3.0.1]: https://github.com/uclahs-cds/pipeline-call-mtSNV/compare/v3.0.0...v3.0.1
-[3.0.2]: https://github.com/uclahs-cds/pipeline-call-mtSNV/compare/v3.0.1...v3.0.2
-[4.0.0-rc.1]: https://github.com/uclahs-cds/pipeline-call-mtSNV/compare/v3.0.2...v4.0.0-rc.1
-[4.0.0]: https://github.com/uclahs-cds/pipeline-call-mtSNV/compare/v4.0.0-rc.1...v4.0.0
-[5.0.0]: https://github.com/uclahs-cds/pipeline-call-mtSNV/compare/v4.0.0...v5.0.0
-[5.1.0]: https://github.com/uclahs-cds/pipeline-call-mtSNV/compare/v5.0.0...v5.1.0
-[6.0.0-rc.1]: https://github.com/uclahs-cds/pipeline-call-mtSNV/compare/v5.1.0...v6.0.0-rc.1
+[1.0.0]: https://github.com/TheBoutrosLab/pipeline-call-mtSNV/compare/v1.0.0-rc1...v1.0.0
+[1.0.0-rc1]: https://github.com/TheBoutrosLab/pipeline-call-mtSNV/releases/tag/v1.0.0-rc1
+[2.0.0]: https://github.com/TheBoutrosLab/pipeline-call-mtSNV/compare/v1.0.0...v2.0.0
+[3.0.0]: https://github.com/TheBoutrosLab/pipeline-call-mtSNV/compare/v3.0.0-rc.1...v3.0.0
+[3.0.0-rc.1]: https://github.com/TheBoutrosLab/pipeline-call-mtSNV/compare/v2.0.0...v3.0.0-rc.1
+[3.0.1]: https://github.com/TheBoutrosLab/pipeline-call-mtSNV/compare/v3.0.0...v3.0.1
+[3.0.2]: https://github.com/TheBoutrosLab/pipeline-call-mtSNV/compare/v3.0.1...v3.0.2
+[4.0.0]: https://github.com/TheBoutrosLab/pipeline-call-mtSNV/compare/v4.0.0-rc.1...v4.0.0
+[4.0.0-rc.1]: https://github.com/TheBoutrosLab/pipeline-call-mtSNV/compare/v3.0.2...v4.0.0-rc.1
+[5.0.0]: https://github.com/TheBoutrosLab/pipeline-call-mtSNV/compare/v4.0.0...v5.0.0
+[5.1.0]: https://github.com/TheBoutrosLab/pipeline-call-mtSNV/compare/v5.0.0...v5.1.0
+[6.0.0]: https://github.com/TheBoutrosLab/pipeline-call-mtSNV/compare/v6.0.0-rc.1...v6.0.0
+[6.0.0-rc.1]: https://github.com/TheBoutrosLab/pipeline-call-mtSNV/compare/v5.1.0...v6.0.0-rc.1
