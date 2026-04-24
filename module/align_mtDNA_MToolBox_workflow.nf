@@ -11,6 +11,7 @@ include { run_index_SAMtools } from '../external/pipeline-Nextflow-module/module
     options: [
         output_dir: "${params.output_dir_base}/output",
         docker_image_version: params.samtools_version,
+        docker_image: params.SAMtools_docker_image,
         main_process: "./"
     ]
 )
