@@ -197,7 +197,7 @@ process downsample_BAM_Picard {
             [:]
             )
         """
-        java -jar /usr/local/share/picard-slim-${params.picard_version}-0/picard.jar \
+        java -jar /opt/conda/envs/picard/share/picard-slim-${params.picard_version}-0/picard.jar \
         DownsampleSam \
             INPUT=$mtoolbox_out \
             OUTPUT=${output_filename_base}_downsampled.bam \
