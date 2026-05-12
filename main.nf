@@ -1,18 +1,13 @@
-/***
-Copyright (c) 2021, UCLA JCCC / Laboratory of Paul C. Boutros
-'Call-mtSNV' - A Nextflow pipeline for somatic mtSNV (heteroplasmy) calling with NGS data
-Written by: Takafumi Yamaguchi
-Nextflowization: Alfredo Enrique Gonzalez, Andrew Park
-***/
-//// DSL Version Declaration ////
 nextflow.enable.dsl=2
 
-//// Import of Local Modules ////
-include { validate as validate_input         } from './module/validate_workflow.nf' addParams(validation_type: 'input')
-include { extract_mtDNA                      } from './module/extract_mtDNA_workflow.nf'
-include { align_mtDNA                        } from './module/align_mtDNA_MToolBox_workflow'
-include { call_mtSNV                         } from './module/call_mtSNV_mitoCaller_workflow'
-include { validate as validate_output        } from './module/validate_workflow.nf' addParams(validation_type: 'output')
+include {
+    run_validate_PipeVal as validate_input_PipeVal
+    run_validate_PipeVal as validate_output_PipeVal
+} from './external/pipeline-Nextflow-module/modules/PipeVal/validate/main.nf'
+
+include { extract_mtDNA } from './module/extract_mtDNA_workflow.nf'
+include { align_mtDNA } from './module/align_mtDNA_MToolBox_workflow'
+include { call_mtSNV } from './module/call_mtSNV_mitoCaller_workflow'
 
 log.info """\
 ======================================
@@ -55,7 +50,32 @@ Channel
 
 workflow{
 
-    validate_input(input_validation)
+    meta_base = Channel.value([
+        output_dir_base: params.output_dir_base,
+        log_output_dir: params.log_output_dir
+        ])
+
+    input_validate_meta = meta_base.map{ base_m ->
+        [
+            docker_image: params.pipeval_docker_image,
+            validate_extra_args: params.getOrDefault('validate_extra_args', '')
+        ] + base_m
+    }
+
+    output_validate_meta = meta_base.map{ base_m ->
+        [
+            docker_image: params.pipeval_docker_image
+        ] + base_m
+    }
+
+    validate_input_PipeVal(input_validate_meta.combine(input_validation))
+
+    validate_input_PipeVal.out.validation_result.collectFile(
+        name: "input_validation.txt",
+        storeDir: "${params.output_dir_base}/validation"
+    )
+
+    validate_input(input_validate_meta, input_validation)
 
     extract_mtDNA(ich)
 
@@ -63,6 +83,10 @@ workflow{
 
     call_mtSNV(align_mtDNA.out.bam_for_mitoCaller)
 
-    validate_output(align_mtDNA.out.bam_ch.mix(call_mtSNV.out.vcf_gz))
+    validate_output_PipeVal(input_validate_meta.combine(align_mtDNA.out.bam_ch.mix(call_mtSNV.out.vcf_gz)))
 
-    }
+    validate_output_PipeVal.out.validation_result.collectFile(
+        name: "output_validation.txt",
+        storeDir: "${params.output_dir_base}/validation"
+    )
+}
