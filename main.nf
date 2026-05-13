@@ -77,7 +77,7 @@ workflow{
 
     extract_mtDNA(meta_base, ich)
 
-    align_mtDNA(extract_mtDNA.out.extracted_mt_reads)
+    align_mtDNA(meta_base, extract_mtDNA.out.extracted_mt_reads)
 
     call_mtSNV(meta_base, align_mtDNA.out.bam_for_mitoCaller)
 
