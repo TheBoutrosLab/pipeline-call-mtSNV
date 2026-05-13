@@ -62,34 +62,34 @@ process align_mtDNA_MToolBox {
     container params.MToolBox_docker_image
 
     // Main output recalibrated & reheadered reads
-    publishDir {"${META.output_dir_base}/output/"},
+    publishDir path: "${META.output_dir_base}/output/",
         pattern: "${output_filename_base}.bam",
         mode: 'copy'
 
-    publishDir {"${META.output_dir_base}/output/"},
+    publishDir path: "${META.output_dir_base}/output/",
         pattern: "{mt_classification_best_results.csv,prioritized_variants.txt}",
         mode: 'copy',
         saveAs: {"${output_filename_base}_${sanitize_string(file(it).getName())}"}
 
-    publishDir {"${META.output_dir_base}/output/"},
+    publishDir path: "${META.output_dir_base}/output/",
         pattern: "summary*.txt",
         mode: 'copy',
         saveAs: {"${output_filename_base}_summary.txt"}
 
-    publishDir {"${META.output_dir_base}/intermediate/${task.process.replace(':', '/')}_${sample_name}/"},
+    publishDir path: "${META.output_dir_base}/intermediate/${task.process.replace(':', '/')}_${sample_name}/",
         enabled: params.save_intermediate_files,
         pattern: "OUT_${bamql_out.baseName}/*",
         mode: 'copy',
         saveAs: {"OUT_${bamql_out.baseName}/${sanitize_string(file(it).getName())}"}
 
-    publishDir {"${META.output_dir_base}/intermediate/${task.process.replace(':', '/')}_${sample_name}/"},
+    publishDir path: "${META.output_dir_base}/intermediate/${task.process.replace(':', '/')}_${sample_name}/",
         enabled: params.save_intermediate_files,
         pattern: "{tmp,VCF_dict_tmp,test}",
         mode: 'copy',
         saveAs: {"${output_filename_base}_${sanitize_string(file(it).getName())}"}
 
     // mtoolbox folder with supplementary files
-    publishDir {"${META.output_dir_base}/intermediate/${task.process.replace(':', '/')}_${sample_name}/"},
+    publishDir path: "${META.output_dir_base}/intermediate/${task.process.replace(':', '/')}_${sample_name}/",
         enabled: params.save_intermediate_files,
         pattern: "*.{txt,conf,vcf,gz}",
         mode: 'copy',
@@ -165,16 +165,16 @@ EOF
 process downsample_BAM_Picard {
     container params.picard_docker_image
 
-    publishDir {"${META.output_dir_base}/output/"},
+    publishDir path: "${META.output_dir_base}/output/",
         pattern: "${output_filename_base}_downsampled.bam",
         mode: 'copy'
 
-    publishDir {"${META.output_dir_base}/output/"},
+    publishDir path: "${META.output_dir_base}/output/",
         pattern: "*.bai",
         mode: 'copy',
         saveAs: { "${output_filename_base}_downsampled.bam.bai" }
 
-    publishDir {"${META.output_dir_base}/QC/${task.process.replace(':', '/')}_${sample_name}/"},
+    publishDir path: "${META.output_dir_base}/QC/${task.process.replace(':', '/')}_${sample_name}/",
         enabled: params.save_intermediate_files,
         pattern: "*metrics.txt",
         mode: 'copy',

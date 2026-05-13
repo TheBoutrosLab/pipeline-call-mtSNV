@@ -21,7 +21,7 @@ workflow call_mtSNV {
             [meta + [
                 "output_dir": meta.output_dir_base,
                 "id": sample,
-                "save_intermediate_files": meta.save_intermediate_files,
+                "save_intermediate_files": params.save_intermediate_files,
                 "docker_image": params.SAMtools_docker_image
             ], vcf]
         }
@@ -73,8 +73,8 @@ process call_mtSNV_mitoCaller {
     container params.mitocaller_docker_image
     // Note - reference genome needs to be mounted otherwise mitocaller fails
 
-    publishDir {"${META.output_dir_base}/intermediate/${task.process.replace(':', '/')}_${sample_name}/"},
-        enabled: META.save_intermediate_files,
+    publishDir path: "${META.output_dir_base}/intermediate/${task.process.replace(':', '/')}_${sample_name}/",
+        enabled: params.save_intermediate_files,
         pattern: "${type}_${sample_name}_mitoCaller.tsv",
         mode: 'copy',
         saveAs: { "${output_filename_base}.tsv" }
@@ -154,19 +154,19 @@ process call_heteroplasmy {
     container params.heteroplasmy_script_docker_image
 
     // filtered tsv
-    publishDir {"${META.output_dir_base}/output/"},
+    publishDir path: "${META.output_dir_base}/output/",
         pattern: "${output_filename_base}.tsv",
         mode: "copy"
 
     // unfiltered tsv
-    publishDir {"${META.output_dir_base}/intermediate/${task.process.replace(':', '/')}/"},
-        enabled: META.save_intermediate_files,
+    publishDir path: "${META.output_dir_base}/intermediate/${task.process.replace(':', '/')}/",
+        enabled: params.save_intermediate_files,
         pattern: "${output_filename_base}_unfiltered.tsv",
         mode: "copy"
 
     // info
-    publishDir {"${META.output_dir_base}/intermediate/${task.process.replace(':', '/')}/"},
-        enabled: META.save_intermediate_files,
+    publishDir path: "${META.output_dir_base}/intermediate/${task.process.replace(':', '/')}/",
+        enabled: params.save_intermediate_files,
         pattern: "*info",
         mode: "copy",
         saveAs: { "${output_filename_base}.pl.programinfo" }
