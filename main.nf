@@ -79,7 +79,7 @@ workflow{
 
     align_mtDNA(extract_mtDNA.out.extracted_mt_reads)
 
-    call_mtSNV(align_mtDNA.out.bam_for_mitoCaller)
+    call_mtSNV(meta_base, align_mtDNA.out.bam_for_mitoCaller)
 
     validate_output_PipeVal(input_validate_meta.combine(align_mtDNA.out.bam_ch.mix(call_mtSNV.out.vcf_gz)))
 
