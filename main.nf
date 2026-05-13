@@ -81,7 +81,13 @@ workflow{
 
     call_mtSNV(meta_base, align_mtDNA.out.bam_for_mitoCaller)
 
-    validate_output_PipeVal(input_validate_meta.combine(align_mtDNA.out.bam_ch.mix(call_mtSNV.out.vcf_gz)))
+    validate_output_PipeVal(
+        input_validate_meta.combine(
+            align_mtDNA.out.bam_ch
+                .map{ aligned_bam -> aligned_bam[2] } // Just the BAM
+                .mix(call_mtSNV.out.vcf_gz)
+        )
+    )
 
     validate_output_PipeVal.out.validation_result.collectFile(
         name: "output_validation.txt",
