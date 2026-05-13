@@ -35,11 +35,11 @@ workflow call_mtSNV {
         .set{ vcf_gz }
 
     META.map{ base_m ->
-        [
+        base_m + [
             "output_dir": "${base_m.output_dir_base}/output",
             "checksum_alg": 'sha512',
             "docker_image": params.pipeval_docker_image
-        ] + base_m
+        ]
     }.set{ checksum_meta }
 
     checksum_meta.combine(

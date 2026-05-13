@@ -41,11 +41,11 @@ workflow align_mtDNA {
         .set { checksum_files }
 
     META.map{ base_m ->
-        [
+        base_m + [
             "output_dir": "${base_m.output_dir_base}/output",
             "checksum_alg": "sha512",
             "docker_image": params.pipeval_docker_image
-        ] + base_m
+        ]
     }.set{ checksum_meta }
 
     checksum_meta.combine(checksum_files)
