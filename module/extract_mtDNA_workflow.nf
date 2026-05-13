@@ -2,14 +2,15 @@ include {generate_standard_filename} from "${projectDir}/external/pipeline-Nextf
 
 workflow extract_mtDNA {
     take:
+    META
     ich
     main:
     if (params.input_type == 'BAM') {
-        extract_mtDNA_BAMQL(ich)
+        extract_mtDNA_BAMQL(META, ich)
         extracted_mt_reads = extract_mtDNA_BAMQL.out.extracted_mt_reads
     }
     else { // input_type == CRAM
-        extract_mtDNA_SAMtools(ich)
+        extract_mtDNA_SAMtools(META, ich)
         extracted_mt_reads = extract_mtDNA_SAMtools.out.extracted_mt_reads
     }
     emit:
@@ -20,8 +21,8 @@ process extract_mtDNA_BAMQL {
     container params.BAMQL_docker_image
 
     //  extracted mt DNA
-    publishDir {"${params.output_dir_base}/intermediate/${task.process.replace(':', '/')}_${sample_name}/"},
-        enabled: params.save_intermediate_files,
+    publishDir {"${META.output_dir_base}/intermediate/${task.process.replace(':', '/')}_${sample_name}/"},
+        enabled: META.save_intermediate_files,
         pattern: "extracted_mt_reads_*",
         mode: 'copy',
         saveAs: {"${output_filename_base}.bam"}
@@ -30,6 +31,7 @@ process extract_mtDNA_BAMQL {
     ext log_dir_suffix: { "/${sample_name}" }
 
     input:
+        val(META)
         tuple(
             val(type),
             val(sample_name),
@@ -58,8 +60,8 @@ process extract_mtDNA_SAMtools {
     container params.SAMtools_docker_image
 
     //  extracted mt DNA
-    publishDir {"${params.output_dir_base}/intermediate/${task.process.replace(':', '/')}_${sample_name}/"},
-        enabled: params.save_intermediate_files,
+    publishDir {"${META.output_dir_base}/intermediate/${task.process.replace(':', '/')}_${sample_name}/"},
+        enabled: META.save_intermediate_files,
         pattern: "extracted_mt_reads_*",
         mode: 'copy',
         saveAs: {"${output_filename_base}.bam"}
@@ -69,6 +71,7 @@ process extract_mtDNA_SAMtools {
         containerOptions: { cram_reference_genome -> "${params.container_mount_flag} ${cram_reference_genome}:${cram_reference_genome}"}(file(params.cram_reference_genome).getParent())
 
     input:
+        val(META)
         tuple(
             val(type),
             val(sample_name),
