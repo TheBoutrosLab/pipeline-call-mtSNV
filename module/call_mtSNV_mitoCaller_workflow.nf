@@ -1,41 +1,54 @@
 include { generate_standard_filename } from "${projectDir}/external/pipeline-Nextflow-module/modules/common/generate_standardized_filename/main.nf"
-include { generate_checksum_PipeVal  } from '../external/pipeline-Nextflow-module/modules/PipeVal/generate-checksum/main.nf' addParams(
-    options: [
-        output_dir: "${params.output_dir_base}/output",
-        docker_image_version: params.pipeval_version,
-        main_process: "./",
-        checksum_alg: 'sha512'
-        ]
-    )
-include { compress_index_VCF         } from '../external/pipeline-Nextflow-module/modules/common/index_VCF_tabix/main.nf' addParams(
-    options: [
-        output_dir:  "${params.output_dir_base}",
-        docker_image:  params.SAMtools_docker_image
-    ]
-)
+include { generate_checksum_PipeVal } from '../external/pipeline-Nextflow-module/modules/PipeVal/generate-checksum/main.nf'
+include { compress_index_VCF } from '../external/pipeline-Nextflow-module/modules/common/index_VCF_tabix/main.nf'
 
 workflow call_mtSNV {
     take:
+    META
     bam_for_mitoCaller
 
     main:
-    call_mtSNV_mitoCaller( bam_for_mitoCaller )
-    convert_mitoCaller2vcf_mitoCaller( call_mtSNV_mitoCaller.out.mt_variants_tsv )
+    call_mtSNV_mitoCaller(META, bam_for_mitoCaller)
+    convert_mitoCaller2vcf_mitoCaller(META, call_mtSNV_mitoCaller.out.mt_variants_tsv)
 
     convert_mitoCaller2vcf_mitoCaller.out.vcf_idx_ch
         .mix(convert_mitoCaller2vcf_mitoCaller.out.homoplasmy_vcf_idx_ch)
         .set{idx_ch}
-    compress_index_VCF(idx_ch)
+
+    idx_ch
+        .combine(META)
+        .map{ sample, vcf, meta ->
+            [meta + [
+                "output_dir": meta.output_dir_base,
+                "id": sample,
+                "save_intermediate_files": params.save_intermediate_files,
+                "docker_image": params.SAMtools_docker_image
+            ], vcf]
+        }
+        .set{ compress_index_ch }
+
+    compress_index_VCF(compress_index_ch)
 
     compress_index_VCF.out.index_out
-        .map{sample, vcf_gz, vcf_index -> vcf_gz}
+        .map{ meta, vcf_gz, vcf_index -> vcf_gz}
         .flatten()
         .set{ vcf_gz }
 
-    compress_index_VCF.out.index_out
-        .map{sample, vcf_gz, vcf_index -> [vcf_gz, vcf_index]}.flatten()
-        .set{ checksum_ch }
+    META.map{ base_m ->
+        base_m + [
+            "output_dir": "${base_m.output_dir_base}/output",
+            "checksum_alg": 'sha512',
+            "docker_image": params.pipeval_docker_image
+        ]
+    }.set{ checksum_meta }
 
+    checksum_meta.combine(
+        compress_index_VCF.out.index_out
+            .map{ meta, vcf_gz, vcf_index ->
+                [vcf_gz, vcf_index]
+            }
+            .flatten()
+    ).set{ checksum_ch }
 
     if (params.sample_mode == 'paired') {
         call_mtSNV_mitoCaller.out.mt_variants_gz.branch{
@@ -43,10 +56,12 @@ workflow call_mtSNV {
             tumor: it[0] == 'tumor'
             }
             .set{ mitoCaller_forked_ch }
-        call_heteroplasmy( mitoCaller_forked_ch.normal, mitoCaller_forked_ch.tumor )
-        checksum_ch.mix(call_heteroplasmy.out.tsv)
-            .set{ checksum_ch }
-        }
+        call_heteroplasmy(META, mitoCaller_forked_ch.normal, mitoCaller_forked_ch.tumor)
+
+        checksum_ch.mix(
+            checksum_meta.combine(call_heteroplasmy.out.tsv)
+        ).set{ checksum_ch }
+    }
 
     generate_checksum_PipeVal(checksum_ch)
 
@@ -58,7 +73,7 @@ process call_mtSNV_mitoCaller {
     container params.mitocaller_docker_image
     // Note - reference genome needs to be mounted otherwise mitocaller fails
 
-    publishDir {"${params.output_dir_base}/intermediate/${task.process.replace(':', '/')}_${sample_name}/"},
+    publishDir path: "${META.output_dir_base}/intermediate/${task.process.replace(':', '/')}_${sample_name}/",
         enabled: params.save_intermediate_files,
         pattern: "${type}_${sample_name}_mitoCaller.tsv",
         mode: 'copy',
@@ -69,6 +84,7 @@ process call_mtSNV_mitoCaller {
         containerOptions: { mt_ref_genome_dir -> "${params.container_mount_flag} ${mt_ref_genome_dir}:/mitochondria-ref/"}(params.mt_ref_genome_dir)
 
     input:
+        val(META)
         tuple(
             val(type),
             val(sample_name),
@@ -101,6 +117,7 @@ process convert_mitoCaller2vcf_mitoCaller {
     ext log_dir_suffix: { "/${sample_name}" }
 
     input:
+        val(META)
         tuple(
             val( type ),
             val( sample_name ),
@@ -137,24 +154,25 @@ process call_heteroplasmy {
     container params.heteroplasmy_script_docker_image
 
     // filtered tsv
-    publishDir {"${params.output_dir_base}/output/"},
+    publishDir path: "${META.output_dir_base}/output/",
         pattern: "${output_filename_base}.tsv",
         mode: "copy"
 
     // unfiltered tsv
-    publishDir {"${params.output_dir_base}/intermediate/${task.process.replace(':', '/')}/"},
+    publishDir path: "${META.output_dir_base}/intermediate/${task.process.replace(':', '/')}/",
         enabled: params.save_intermediate_files,
         pattern: "${output_filename_base}_unfiltered.tsv",
         mode: "copy"
 
     // info
-    publishDir {"${params.output_dir_base}/intermediate/${task.process.replace(':', '/')}/"},
+    publishDir path: "${META.output_dir_base}/intermediate/${task.process.replace(':', '/')}/",
         enabled: params.save_intermediate_files,
         pattern: "*info",
         mode: "copy",
         saveAs: { "${output_filename_base}.pl.programinfo" }
 
     input:
+        val(META)
         tuple(
             val(normal_key),
             val(normal_sample_name),

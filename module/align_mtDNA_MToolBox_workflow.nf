@@ -1,52 +1,57 @@
-include {generate_standard_filename; sanitize_string} from "${projectDir}/external/pipeline-Nextflow-module/modules/common/generate_standardized_filename/main.nf"
-include { generate_checksum_PipeVal                 } from '../external/pipeline-Nextflow-module/modules/PipeVal/generate-checksum/main.nf' addParams(
-    options: [
-        output_dir: "${params.output_dir_base}/output",
-        docker_image_version: params.pipeval_version,
-        main_process: "./",
-        checksum_alg: 'sha512'
-        ]
-    )
-include { run_index_SAMtools } from '../external/pipeline-Nextflow-module/modules/SAMtools/index/main.nf' addParams(
-    options: [
-        output_dir: "${params.output_dir_base}/output",
-        docker_image_version: params.samtools_version,
-        docker_image: params.SAMtools_docker_image,
-        main_process: "./"
-    ]
-)
+include { generate_standard_filename; sanitize_string } from "../external/pipeline-Nextflow-module/modules/common/generate_standardized_filename/main.nf"
+include { generate_checksum_PipeVal } from '../external/pipeline-Nextflow-module/modules/PipeVal/generate-checksum/main.nf'
+include { run_index_SAMtools } from '../external/pipeline-Nextflow-module/modules/SAMtools/index/main.nf'
 
 workflow align_mtDNA {
     take:
+    META
     extracted_mt_reads
 
     main:
-    align_mtDNA_MToolBox( extracted_mt_reads )
+    align_mtDNA_MToolBox(META, extracted_mt_reads)
 
     align_mtDNA_MToolBox.out.aligned_mt_reads
-        .map{ type, sample, bam -> [sample, bam] } // [type, sample, path]
         .set { bam_ch }
 
     bam_for_mitoCaller = align_mtDNA_MToolBox.out.aligned_mt_reads
     if (params.downsample_mtoolbox_bam) {
-        downsample_BAM_Picard(align_mtDNA_MToolBox.out.aligned_mt_reads)
+        downsample_BAM_Picard(META, align_mtDNA_MToolBox.out.aligned_mt_reads)
         bam_for_mitoCaller = downsample_BAM_Picard.out.downsampled_mt_reads
 
-        bam_ch.mix(
-            bam_for_mitoCaller
-                .map{ type, sample, bam -> [sample, bam] }
-            )
+        bam_ch.mix(bam_for_mitoCaller)
             .set{ bam_ch }
         }
 
-    // generate_checksum_PipeVal(bam_channel)
-    run_index_SAMtools(bam_ch)
+    META.combine(bam_ch)
+        .map{ meta, type, sample, bam ->
+            [meta + [
+                "output_dir": "${meta.output_dir_base}/output",
+                "id": sample,
+                "docker_image": params.SAMtools_docker_image
+            ], bam]
+        }
+        .set { index_ch }
+
+    run_index_SAMtools(index_ch)
+
     bam_ch
-        .map{ sample, bam -> bam }
+        .map{ type, sample, bam -> bam }
         .flatten()
-        .mix(run_index_SAMtools.out.index)
-        .set { bam_ch }
-    generate_checksum_PipeVal(bam_ch)
+        .mix(run_index_SAMtools.out.index.map{ meta, index -> index }.flatten())
+        .set { checksum_files }
+
+    META.map{ base_m ->
+        base_m + [
+            "output_dir": "${base_m.output_dir_base}/output",
+            "checksum_alg": "sha512",
+            "docker_image": params.pipeval_docker_image
+        ]
+    }.set{ checksum_meta }
+
+    checksum_meta.combine(checksum_files)
+        .set { checksum_ch }
+
+    generate_checksum_PipeVal(checksum_ch)
 
     emit:
     bam_for_mitoCaller
@@ -57,34 +62,34 @@ process align_mtDNA_MToolBox {
     container params.MToolBox_docker_image
 
     // Main output recalibrated & reheadered reads
-    publishDir {"${params.output_dir_base}/output/"},
+    publishDir path: "${META.output_dir_base}/output/",
         pattern: "${output_filename_base}.bam",
         mode: 'copy'
 
-    publishDir {"${params.output_dir_base}/output/"},
+    publishDir path: "${META.output_dir_base}/output/",
         pattern: "{mt_classification_best_results.csv,prioritized_variants.txt}",
         mode: 'copy',
         saveAs: {"${output_filename_base}_${sanitize_string(file(it).getName())}"}
 
-    publishDir {"${params.output_dir_base}/output/"},
+    publishDir path: "${META.output_dir_base}/output/",
         pattern: "summary*.txt",
         mode: 'copy',
         saveAs: {"${output_filename_base}_summary.txt"}
 
-    publishDir {"${params.output_dir_base}/intermediate/${task.process.replace(':', '/')}_${sample_name}/"},
+    publishDir path: "${META.output_dir_base}/intermediate/${task.process.replace(':', '/')}_${sample_name}/",
         enabled: params.save_intermediate_files,
         pattern: "OUT_${bamql_out.baseName}/*",
         mode: 'copy',
         saveAs: {"OUT_${bamql_out.baseName}/${sanitize_string(file(it).getName())}"}
 
-    publishDir {"${params.output_dir_base}/intermediate/${task.process.replace(':', '/')}_${sample_name}/"},
+    publishDir path: "${META.output_dir_base}/intermediate/${task.process.replace(':', '/')}_${sample_name}/",
         enabled: params.save_intermediate_files,
         pattern: "{tmp,VCF_dict_tmp,test}",
         mode: 'copy',
         saveAs: {"${output_filename_base}_${sanitize_string(file(it).getName())}"}
 
     // mtoolbox folder with supplementary files
-    publishDir {"${params.output_dir_base}/intermediate/${task.process.replace(':', '/')}_${sample_name}/"},
+    publishDir path: "${META.output_dir_base}/intermediate/${task.process.replace(':', '/')}_${sample_name}/",
         enabled: params.save_intermediate_files,
         pattern: "*.{txt,conf,vcf,gz}",
         mode: 'copy',
@@ -95,6 +100,7 @@ process align_mtDNA_MToolBox {
         containerOptions: { gmapdb, mt_ref_genome_dir -> "${params.platform_set} ${params.container_mount_flag} \"${gmapdb}:/src/gmapdb/\" ${params.container_mount_flag} \"${mt_ref_genome_dir}:/src/genome_fasta/\""}(params.gmapdb, params.mt_ref_genome_dir)
 
     input:
+        val(META)
         tuple(
             val(type),
             val(sample_name),
@@ -159,16 +165,16 @@ EOF
 process downsample_BAM_Picard {
     container params.picard_docker_image
 
-    publishDir {"${params.output_dir_base}/output/"},
+    publishDir path: "${META.output_dir_base}/output/",
         pattern: "${output_filename_base}_downsampled.bam",
         mode: 'copy'
 
-    publishDir {"${params.output_dir_base}/output/"},
+    publishDir path: "${META.output_dir_base}/output/",
         pattern: "*.bai",
         mode: 'copy',
         saveAs: { "${output_filename_base}_downsampled.bam.bai" }
 
-    publishDir {"${params.output_dir_base}/QC/${task.process.replace(':', '/')}_${sample_name}/"},
+    publishDir path: "${META.output_dir_base}/QC/${task.process.replace(':', '/')}_${sample_name}/",
         enabled: params.save_intermediate_files,
         pattern: "*metrics.txt",
         mode: 'copy',
@@ -178,6 +184,7 @@ process downsample_BAM_Picard {
     ext log_dir_suffix: { "/${sample_name}" }
 
     input:
+        val(META)
         tuple(
             val(type),
             val(sample_name),
