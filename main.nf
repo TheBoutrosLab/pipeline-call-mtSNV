@@ -68,7 +68,7 @@ workflow{
         ] + base_m
     }
 
-    validate_input_PipeVal(input_validate_meta.combine(input_validation))
+    validate_input_PipeVal(input_validate_meta.combine(input_validation.flatten()))
 
     validate_input_PipeVal.out.validation_result.collectFile(
         name: "input_validation.txt",
