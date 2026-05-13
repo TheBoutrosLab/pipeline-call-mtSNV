@@ -20,6 +20,7 @@ workflow call_mtSNV {
         .map{ sample, vcf, meta ->
             [meta + [
                 "output_dir": meta.output_dir_base,
+                "log_output_dir": "${meta.log_output_dir}/process-log",
                 "id": sample,
                 "save_intermediate_files": params.save_intermediate_files,
                 "docker_image": params.SAMtools_docker_image
