@@ -75,7 +75,7 @@ workflow{
         storeDir: "${params.output_dir_base}/validation"
     )
 
-    extract_mtDNA(ich)
+    extract_mtDNA(meta_base, ich)
 
     align_mtDNA(extract_mtDNA.out.extracted_mt_reads)
 
