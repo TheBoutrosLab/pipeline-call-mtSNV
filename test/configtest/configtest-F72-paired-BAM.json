@@ -164,6 +164,7 @@
       "patient_id": "illumina",
       "picard_docker_image": "ghcr.io/theboutroslab/picard:3.4.0",
       "picard_version": "3.4.0",
+      "pipeval_docker_image": "ghcr.io/uclahs-cds/pipeval:5.0.0-rc.3",
       "pipeval_version": "5.0.0-rc.3",
       "platform_set": "--platform linux/amd64",
       "probability_downsample": "0.5",
