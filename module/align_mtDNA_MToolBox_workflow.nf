@@ -110,7 +110,6 @@ process align_mtDNA_MToolBox {
     output:
         tuple val(type), val(sample_name), path("${output_filename_base}.bam"), emit: aligned_mt_reads
 
-        path '.command.*'
         path("OUT_${bamql_out.baseName}/*")
         path("*.csv")
         path("*.txt")
@@ -193,7 +192,6 @@ process downsample_BAM_Picard {
 
     output:
         tuple val(type), val(sample_name), path("*.bam"), emit: downsampled_mt_reads
-        path '.command.*'
         path("*downsampleSAM-metrics.txt")
         path("*.bai"), emit: bai_files, optional: true
 

@@ -41,7 +41,6 @@ process extract_mtDNA_BAMQL {
 
     output:
         tuple val(type), val(sample_name), path('extracted_mt_reads_*'), emit: extracted_mt_reads
-        file '.command.*'
 
     script:
         output_filename_base = generate_standard_filename(
@@ -81,7 +80,6 @@ process extract_mtDNA_SAMtools {
 
     output:
         tuple val(type), val(sample_name), path('extracted_mt_reads_*'), emit: extracted_mt_reads
-        file '.command.*'
 
     script:
         output_filename_base = generate_standard_filename(
