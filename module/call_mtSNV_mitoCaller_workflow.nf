@@ -95,7 +95,6 @@ process call_mtSNV_mitoCaller {
     output:
         tuple val(type), val(sample_name), path("${type}_${sample_name}_mitoCaller.tsv.gz"), emit: mt_variants_gz
         tuple val(type), val(sample_name), path("${type}_${sample_name}_mitoCaller.tsv"), emit: mt_variants_tsv
-        path '.command.*'
 
     script:
         output_filename_base = generate_standard_filename(
@@ -128,7 +127,6 @@ process convert_mitoCaller2vcf_mitoCaller {
     output:
         tuple val(sample_name), path("${output_file}"), emit: vcf_idx_ch
         tuple val(sample_name), path("${output_file_homoplasmy}"), emit: homoplasmy_vcf_idx_ch
-        path '.command.*'
 
     script:
         output_filename_base = generate_standard_filename(
@@ -189,7 +187,6 @@ process call_heteroplasmy {
     output:
         path '*.tsv'
         path("${output_filename_base}.tsv"), emit: tsv
-        path '.command.*'
         path '*info'
 
     script:

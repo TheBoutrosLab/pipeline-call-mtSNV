@@ -11,6 +11,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ### Removed
 
 - Usage of `addParams`
+- Unnecessary `.command.*` output channels from processes
 
 ## [6.0.0] - 2026-04-24
 
