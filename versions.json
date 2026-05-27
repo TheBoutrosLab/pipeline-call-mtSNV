@@ -4,16 +4,16 @@
     "title": "development",
     "aliases": [],
     "properties": {
-      "commit": "ef98184020be85ded17396db9400143467212ac7",
-      "date": "2026-05-20T11:37:01-07:00"
+      "commit": "b1840588cfe8554772f0d740dc48337f5d5de7b2",
+      "date": "2026-05-27T11:22:31-07:00"
     }
   },
   {
     "version": "v6.0.0",
     "title": "v6.0.0",
     "aliases": [
-      "latest",
-      "release-candidate"
+      "release-candidate",
+      "latest"
     ],
     "properties": {
       "commit": "5da68cea4c8da8f7c4d9e0d054e36164d3d06f93",
