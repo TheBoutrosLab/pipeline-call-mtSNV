@@ -27,7 +27,8 @@ workflow align_mtDNA {
             [meta + [
                 "output_dir": "${meta.output_dir_base}/output",
                 "id": sample,
-                "docker_image": params.SAMtools_docker_image
+                "docker_image": params.SAMtools_docker_image,
+                "log_output_dir": "${meta.log_output_dir}/process-log"
             ], bam]
         }
         .set { index_ch }
@@ -44,7 +45,8 @@ workflow align_mtDNA {
         base_m + [
             "output_dir": "${base_m.output_dir_base}/output",
             "checksum_alg": "sha512",
-            "docker_image": params.pipeval_docker_image
+            "docker_image": params.pipeval_docker_image,
+            "log_output_dir": "${base_m.log_output_dir}/process-log"
         ]
     }.set{ checksum_meta }
 

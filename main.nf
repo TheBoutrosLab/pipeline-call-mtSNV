@@ -56,16 +56,18 @@ workflow{
         ])
 
     input_validate_meta = meta_base.map{ base_m ->
-        [
+        base_m + [
             docker_image: params.pipeval_docker_image,
-            validate_extra_args: params.getOrDefault('validate_extra_args', '')
-        ] + base_m
+            validate_extra_args: params.getOrDefault('validate_extra_args', ''),
+            log_output_dir: "${base_m.log_output_dir}/process-log"
+        ]
     }
 
     output_validate_meta = meta_base.map{ base_m ->
-        [
-            docker_image: params.pipeval_docker_image
-        ] + base_m
+        base_m + [
+            docker_image: params.pipeval_docker_image,
+            log_output_dir: "${base_m.log_output_dir}/process-log"
+        ]
     }
 
     validate_input_PipeVal(input_validate_meta.combine(input_validation.flatten()))
