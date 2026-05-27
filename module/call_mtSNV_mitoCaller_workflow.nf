@@ -39,7 +39,8 @@ workflow call_mtSNV {
         base_m + [
             "output_dir": "${base_m.output_dir_base}/output",
             "checksum_alg": 'sha512',
-            "docker_image": params.pipeval_docker_image
+            "docker_image": params.pipeval_docker_image,
+            "log_output_dir": "${base_m.log_output_dir}/process-log"
         ]
     }.set{ checksum_meta }
 
