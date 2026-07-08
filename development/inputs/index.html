@@ -81,6 +81,10 @@
                 </li>
               </ul>
               <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../profiles/">Profiles</a>
+                </li>
+              </ul>
+              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../testing-and-validation/">Testing and Validation</a>
                 </li>
               </ul>
@@ -120,7 +124,7 @@
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
       <li class="breadcrumb-item active">Inputs</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/TheBoutrosLab/pipeline-call-mtSNV/blob/ea53825469dbfdfed20a9c150ee817832e112e0d/README.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/TheBoutrosLab/pipeline-call-mtSNV/blob/bfb6eb164760bb4e089e65265dc85e99a074822c/README.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -130,7 +134,7 @@
               
                 <h2 id="inputs">Inputs</h2>
 <h3 id="inputyaml">input.yaml</h3>
-<p>This input YAML must comply with the format in the provided <a href="https://github.com/TheBoutrosLab/pipeline-call-mtSNV/blob/ea53825469dbfdfed20a9c150ee817832e112e0d/input/input-call-mtSNV-paired.yaml">template</a>.</p>
+<p>This input YAML must comply with the format in the provided <a href="https://github.com/TheBoutrosLab/pipeline-call-mtSNV/blob/bfb6eb164760bb4e089e65265dc85e99a074822c/input/input-call-mtSNV-paired.yaml">template</a>.</p>
 <table>
 <thead>
 <tr>
@@ -162,7 +166,7 @@
 <h4 id="paired-mode">Paired Mode</h4>
 <p>The data will be organized under the tumor sample ID.</p>
 <h3 id="inputconfig">input.config</h3>
-<p>The config file can take 11 arguments. See provided <a href="https://github.com/TheBoutrosLab/pipeline-call-mtSNV/blob/ea53825469dbfdfed20a9c150ee817832e112e0d/config/template.config">template</a>.</p>
+<p>The config file can take 15 arguments. See provided <a href="https://github.com/TheBoutrosLab/pipeline-call-mtSNV/blob/bfb6eb164760bb4e089e65265dc85e99a074822c/config/template.config">template</a>.</p>
 <table>
 <thead>
 <tr>
@@ -251,9 +255,37 @@
 <td style="text-align: left;">string</td>
 <td style="text-align: left;">Corresponds to the ACCURACY parameter in DownsampleSam. Defines the desired accuracy level for the downsampling process. A smaller value indicates higher accuracy but may require more memory.</td>
 </tr>
+<tr>
+<td style="text-align: left;">12</td>
+<td style="text-align: left;"><code>apptainer_library</code></td>
+<td style="text-align: left;">no</td>
+<td style="text-align: left;">path</td>
+<td style="text-align: left;">Path to readable Apptainer library directory containing any existing Apptainer images.</td>
+</tr>
+<tr>
+<td style="text-align: left;">13</td>
+<td style="text-align: left;"><code>apptainer_cache</code></td>
+<td style="text-align: left;">no</td>
+<td style="text-align: left;">path</td>
+<td style="text-align: left;">Path to writable Apptainer cache directory where images will be cached.</td>
+</tr>
+<tr>
+<td style="text-align: left;">14</td>
+<td style="text-align: left;"><code>singularity_library</code></td>
+<td style="text-align: left;">no</td>
+<td style="text-align: left;">path</td>
+<td style="text-align: left;">Path to readable Singularity library directory containing any existing Singularity images.</td>
+</tr>
+<tr>
+<td style="text-align: left;">15</td>
+<td style="text-align: left;"><code>singularity_cache</code></td>
+<td style="text-align: left;">no</td>
+<td style="text-align: left;">path</td>
+<td style="text-align: left;">Path to writable Singularity cache directory where images will be cached.</td>
+</tr>
 </tbody>
 </table>
-<p>Additionally, There are 3 parameters which are defined in a <a href="https://github.com/TheBoutrosLab/pipeline-call-mtSNV/blob/ea53825469dbfdfed20a9c150ee817832e112e0d/config/default.config">default config</a> but can be optionally included and overwritten in the <code>input.config</code>.</p>
+<p>Additionally, There are 3 parameters which are defined in a <a href="https://github.com/TheBoutrosLab/pipeline-call-mtSNV/blob/bfb6eb164760bb4e089e65265dc85e99a074822c/config/default.config">default config</a> but can be optionally included and overwritten in the <code>input.config</code>.</p>
 <table>
 <thead>
 <tr>
@@ -289,7 +321,7 @@
 </tbody>
 </table>
 <h4 id="base-resource-allocation-updaters">Base resource allocation updaters</h4>
-<p>To optionally update the base resource (cpus or memory) allocations for processes, use the following structure and add the necessary parts. The default allocations can be found in the <a href="https://github.com/TheBoutrosLab/pipeline-call-mtSNV/blob/ea53825469dbfdfed20a9c150ee817832e112e0d/config">node-specific config files</a></p>
+<p>To optionally update the base resource (cpus or memory) allocations for processes, use the following structure and add the necessary parts. The default allocations can be found in the <a href="https://github.com/TheBoutrosLab/pipeline-call-mtSNV/blob/bfb6eb164760bb4e089e65265dc85e99a074822c/config">node-specific config files</a></p>
 <pre><code class="language-Nextflow">base_resource_update {
     memory = [
         [['process_name', 'process_name2'], &lt;multiplier for resource&gt;],
