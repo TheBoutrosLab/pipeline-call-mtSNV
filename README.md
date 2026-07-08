@@ -25,6 +25,7 @@
   - [Outputs](#outputs)
     - [Primary outputs](#primary-outputs)
     - [Intermediate outputs](#intermediate-outputs)
+  - [Profiles](#profiles)
   - [Testing and Validation](#testing-and-validation)
     - [Test Data Set](#test-data-set)
     - [Running Tests with NFTest](#running-tests-with-nftest)
@@ -103,7 +104,7 @@ Provide either a normal sample or tumor sample and leave the other entry blank i
 The data will be organized under the tumor sample ID.
 
 ### input.config
-The config file can take 11 arguments. See provided [template](./config/template.config).
+The config file can take 15 arguments. See provided [template](./config/template.config).
 || Input Parameter | Required | Type | Description |
 |:---|:----------------|:---------|:-----|:----------------------------|
 | 1 | `dataset_id` | yes | string | dataset identifier attached to pipeline output. |
@@ -117,6 +118,10 @@ The config file can take 11 arguments. See provided [template](./config/template
 | 9 | `probability_downsample` | no | float | Corresponds to the PROBABILITY parameter in DownsampleSam. Specifies the fraction of reads to retain during downsampling. |
 | 10 |`downsample_strategy`  | no | string | Corresponds to the STRATEGY parameter in DownsampleSam. Determines the algorithm used for downsampling. Options include ConstantMemory, HighAccuracy, and Chained. |
 | 11 |`downsample_accuracy`  | no | string | Corresponds to the ACCURACY parameter in DownsampleSam. Defines the desired accuracy level for the downsampling process. A smaller value indicates higher accuracy but may require more memory. |
+| 12 | `apptainer_library` | no | path | Path to readable Apptainer library directory containing any existing Apptainer images. |
+| 13 | `apptainer_cache` | no | path | Path to writable Apptainer cache directory where images will be cached. |
+| 14 | `singularity_library` | no | path | Path to readable Singularity library directory containing any existing Singularity images. |
+| 15 | `singularity_cache` | no | path | Path to writable Singularity cache directory where images will be cached. |
 
 Additionally, There are 3 parameters which are defined in a [default config](./config/default.config) but can be optionally included and overwritten in the `input.config`.
 
@@ -202,6 +207,16 @@ base_resource_update {
 |call_mtSNV_mitoCaller | `*.tsv` | Contains mtDNA variants (i.e., homoplasmies and heteroplasmies)|
 |call_heteroplasmy | `*unfiltered.tsv` |  **[Paired mode only]** Unfiltered tsv table showing differences in the normal genotype vs tumor genotype. |
 |call_heteroplasmy | `*.pl.programinfo` | **[Paired mode only]** The log file generated for the heteroplasmy call process |
+___
+
+## Profiles
+
+Profiles can be selected to control which containerization system will be used. Profile selection can be passed to the nextflow run command using `-profile`. Available profiles:
+
+- `docker` - Use Docker as the containerization system
+- `apptainer` - Use Apptainer as the containerization system
+- `singularity` - Use Singularity as the containerization system
+
 ___
 
 ## Testing and Validation
