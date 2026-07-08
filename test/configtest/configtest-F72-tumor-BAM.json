@@ -403,6 +403,9 @@
       "set_retry": "closure()",
       "setup_retry": "closure()"
     },
+    "singularity": {
+      "enabled": false
+    },
     "timeline": {
       "enabled": true,
       "file": "/tmp/outputs/call-mtSNV-VER.SI.ON/NA24143/log-call-mtSNV-VER.SI.ON-19970704T165655Z/nextflow-log/timeline.html"
