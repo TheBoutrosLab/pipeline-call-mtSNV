@@ -95,4 +95,8 @@ workflow{
         name: "output_validation.txt",
         storeDir: "${params.output_dir_base}/validation"
     )
+
+    workflow.onComplete = {
+        WorkflowFinalizer.completeWorkflow(workflow, params);
+    }
 }
