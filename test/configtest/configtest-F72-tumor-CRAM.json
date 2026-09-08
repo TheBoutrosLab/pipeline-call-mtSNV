@@ -49,7 +49,8 @@
         "Alfredo Enrique Gonzalez",
         "Takafumi Yamaguchi",
         "Jieun Oh",
-        "Kiarod Pashminehazar"
+        "Kiarod Pashminehazar",
+        "Rupert Hugh-White"
       ],
       "description": "Nextflow pipeline to detect mitochondrial SNV from normal or tumor BAMs or CRAMs: extracts and remaps mitochondrial reads then calls variants",
       "name": "call-mtSNV",
