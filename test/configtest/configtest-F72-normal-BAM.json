@@ -57,7 +57,7 @@
     },
     "params": {
       "BAMQL_docker_image": "ghcr.io/uclahs-cds/bamql:1.6.1",
-      "MToolBox_docker_image": "ghcr.io/theboutroslab/mtoolbox:1.2.1-b52269e_GSNAP-2023-12-01",
+      "MToolBox_docker_image": "ghcr.io/theboutroslab/mtoolbox:1.2.1-b52269e_GSNAP-2025-04-19",
       "SAMtools_docker_image": "ghcr.io/theboutroslab/samtools:1.23",
       "bamql_version": "1.6.1",
       "base_allocations": {
@@ -147,7 +147,7 @@
       "mitocaller_docker_image": "ghcr.io/uclahs-cds/mitocaller:1.0.0",
       "mitocaller_version": "1.0.0",
       "mt_ref_genome_dir": "/hot/resource/mitochondria_ref/genome_fasta/",
-      "mtoolbox_version": "1.2.1-b52269e_GSNAP-2023-12-01",
+      "mtoolbox_version": "1.2.1-b52269e_GSNAP-2025-04-19",
       "output_dir": "/tmp/outputs",
       "output_dir_base": "/tmp/outputs/call-mtSNV-VER.SI.ON/NA24149/mitoCaller-1.0.0/",
       "output_dir_prefix": "/tmp/outputs/call-mtSNV-VER.SI.ON/NA24149",
