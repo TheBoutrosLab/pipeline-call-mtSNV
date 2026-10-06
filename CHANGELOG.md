@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+## [6.4.1] - 2026-10-06
+
 ## [6.4.0] - 2026-09-08
 
 ### Changed
@@ -228,3 +232,5 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 [6.2.0]: https://github.com/TheBoutrosLab/pipeline-call-mtSNV/compare/v6.1.0...v6.2.0
 [6.3.0]: https://github.com/TheBoutrosLab/pipeline-call-mtSNV/compare/v6.2.0...v6.3.0
 [6.4.0]: https://github.com/TheBoutrosLab/pipeline-call-mtSNV/compare/v6.3.0...v6.4.0
+[6.4.1]: https://github.com/TheBoutrosLab/pipeline-call-mtSNV/compare/v6.4.0...v6.4.1
+[unreleased]: https://github.com/TheBoutrosLab/pipeline-call-mtSNV/compare/v6.4.1...HEAD
