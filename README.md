@@ -1,6 +1,6 @@
 # Boutros Lab call-mtSNV pipeline
 
-[![Prepare release](https://img.shields.io/badge/Action-Create%20New%20Release-blue)](https://github.com/theboutroslab/pipeline-call-mtSNV/actions/workflows/prepare-release.yaml)
+[![GitHub release](https://img.shields.io/github/v/release/TheBoutrosLab/pipeline-call-mtSNV)](https://github.com/TheBoutrosLab/pipeline-call-mtSNV/actions/workflows/prepare-release.yaml)
 
 - [Boutros Lab call-mtSNV pipeline](#boutros-lab-call-mtsnv-pipeline)
   - [Overview](#overview)
