@@ -215,6 +215,9 @@
         "[/hot/software/pipeline/pipeline-call-mtSNV/Nextflow/development/input/data/illumina/CRAM/BWA-MEM2-2.2.1_GATK-4.2.4.1_IlluminaSampleTest_NA24149.cram",
         "index]"
       ],
+      "validation_reference_map": {
+        "reference_fasta": "/hot/resource/reference-genome/GRCh38-BI-20160721/Homo_sapiens_assembly38.fasta"
+      },
       "work_dir": "/scratch/8543"
     },
     "process": {
@@ -392,11 +395,6 @@
       "withName:run_validate_PipeVal": {
         "cpus": "1",
         "memory": "2 GB"
-      },
-      "withName:validate_input:run_validate_PipeVal": {
-        "ext": {
-          "containerOptions": "-v /hot/resource/reference-genome/GRCh38-BI-20160721:/hot/resource/reference-genome/GRCh38-BI-20160721"
-        }
       }
     },
     "report": {
