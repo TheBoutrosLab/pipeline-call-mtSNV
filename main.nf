@@ -60,7 +60,7 @@ workflow{
             docker_image: params.pipeval_docker_image,
             validate_extra_args: params.getOrDefault('validate_extra_args', ''),
             log_output_dir: "${base_m.log_output_dir}/process-log"
-        ]
+        ] + params.getOrDefault('validation_reference_map', [:])
     }
 
     output_validate_meta = meta_base.map{ base_m ->
