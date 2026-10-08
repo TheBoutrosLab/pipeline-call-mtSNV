@@ -8,6 +8,8 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ## [Unreleased]
 
+## [6.4.3] - 2026-10-08
+
 ### Changed
 
 - Use module CRAM validation setup
@@ -248,4 +250,5 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 [6.4.0]: https://github.com/TheBoutrosLab/pipeline-call-mtSNV/compare/v6.3.0...v6.4.0
 [6.4.1]: https://github.com/TheBoutrosLab/pipeline-call-mtSNV/compare/v6.4.0...v6.4.1
 [6.4.2]: https://github.com/TheBoutrosLab/pipeline-call-mtSNV/compare/v6.4.1...v6.4.2
-[unreleased]: https://github.com/TheBoutrosLab/pipeline-call-mtSNV/compare/v6.4.2...HEAD
+[6.4.3]: https://github.com/TheBoutrosLab/pipeline-call-mtSNV/compare/v6.4.2...v6.4.3
+[unreleased]: https://github.com/TheBoutrosLab/pipeline-call-mtSNV/compare/v6.4.3...HEAD
