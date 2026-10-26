@@ -79,7 +79,8 @@ process call_mtSNV_mitoCaller {
         enabled: params.save_intermediate_files,
         pattern: "${type}_${sample_name}_mitoCaller.tsv",
         mode: 'copy',
-        saveAs: { "${output_filename_base}.tsv" }
+        saveAs: { "${output_filename_base}.tsv" },
+        failOnError: false
 
     //logs
     ext log_dir_suffix: { "/${sample_name}" },
@@ -156,20 +157,23 @@ process call_heteroplasmy {
     // filtered tsv
     publishDir path: "${META.output_dir_base}/output/",
         pattern: "${output_filename_base}.tsv",
-        mode: "copy"
+        mode: "copy",
+        failOnError: false
 
     // unfiltered tsv
     publishDir path: "${META.output_dir_base}/intermediate/${task.process.replace(':', '/')}/",
         enabled: params.save_intermediate_files,
         pattern: "${output_filename_base}_unfiltered.tsv",
-        mode: "copy"
+        mode: "copy",
+        failOnError: false
 
     // info
     publishDir path: "${META.output_dir_base}/intermediate/${task.process.replace(':', '/')}/",
         enabled: params.save_intermediate_files,
         pattern: "*info",
         mode: "copy",
-        saveAs: { "${output_filename_base}.pl.programinfo" }
+        saveAs: { "${output_filename_base}.pl.programinfo" },
+        failOnError: false
 
     input:
         val(META)
