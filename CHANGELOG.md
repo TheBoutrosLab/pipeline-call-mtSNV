@@ -8,6 +8,8 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ## [Unreleased]
 
+## [7.0.0] - 2026-10-30
+
 ### Changed
 
 - Update to support Nextflow v25.10.5
@@ -255,4 +257,5 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 [6.4.1]: https://github.com/TheBoutrosLab/pipeline-call-mtSNV/compare/v6.4.0...v6.4.1
 [6.4.2]: https://github.com/TheBoutrosLab/pipeline-call-mtSNV/compare/v6.4.1...v6.4.2
 [6.4.3]: https://github.com/TheBoutrosLab/pipeline-call-mtSNV/compare/v6.4.2...v6.4.3
-[unreleased]: https://github.com/TheBoutrosLab/pipeline-call-mtSNV/compare/v6.4.3...HEAD
+[7.0.0]: https://github.com/TheBoutrosLab/pipeline-call-mtSNV/compare/v6.4.3...v7.0.0
+[unreleased]: https://github.com/TheBoutrosLab/pipeline-call-mtSNV/compare/v7.0.0...HEAD
