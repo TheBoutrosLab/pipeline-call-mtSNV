@@ -25,7 +25,8 @@ process extract_mtDNA_BAMQL {
         enabled: params.save_intermediate_files,
         pattern: "extracted_mt_reads_*",
         mode: 'copy',
-        saveAs: {"${output_filename_base}.bam"}
+        saveAs: {"${output_filename_base}.bam"},
+        failOnError: false
 
     //logs
     ext log_dir_suffix: { "/${sample_name}" }
@@ -63,11 +64,12 @@ process extract_mtDNA_SAMtools {
         enabled: params.save_intermediate_files,
         pattern: "extracted_mt_reads_*",
         mode: 'copy',
-        saveAs: {"${output_filename_base}.bam"}
+        saveAs: {"${output_filename_base}.bam"},
+        failOnError: false
 
     //logs
     ext log_dir_suffix: { "/${sample_name}" },
-        containerOptions: { cram_reference_genome -> "${params.container_mount_flag} ${cram_reference_genome}:${cram_reference_genome}"}(file(params.cram_reference_genome).getParent())
+        containerOptions: { cram_reference_genome -> cram_reference_genome ? "${params.container_mount_flag} ${cram_reference_genome}:${cram_reference_genome}" : ''}(params.cram_reference_genome ? file(params.cram_reference_genome).getParent() : null)
 
     input:
         val(META)

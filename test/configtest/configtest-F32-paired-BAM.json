@@ -1,5 +1,5 @@
 {
-  "nextflow_version": "23.10.0",
+  "nextflow_version": "25.10.5",
   "config": [
     "test/global.config",
     "test/input.config"
@@ -149,7 +149,7 @@
       "log_output_dir": "/tmp/outputs/call-mtSNV-VER.SI.ON/NA24143/log-call-mtSNV-VER.SI.ON-19970704T165655Z",
       "max_cpus": "32",
       "max_memory": "60 GB",
-      "max_time": "24d 20h 31m 24s",
+      "max_time": "1000d",
       "min_cpus": "1",
       "min_memory": "1 MB",
       "min_time": "1s",

@@ -46,7 +46,7 @@ ___
 Samples can be run by specifying file locations in the [`input.yaml`](./input/template.yaml) and setting pipeline-specific parameters in the [`input.config`](./config/template.config).
 
 ### Requirements
-Currently supported Nextflow versions: `v23.04.2`
+Currently supported Nextflow versions: `25.10.5` (requires Java 17 or later)
 ___
 
 ## Flow Diagram

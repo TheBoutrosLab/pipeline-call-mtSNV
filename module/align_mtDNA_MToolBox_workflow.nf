@@ -66,36 +66,42 @@ process align_mtDNA_MToolBox {
     // Main output recalibrated & reheadered reads
     publishDir path: "${META.output_dir_base}/output/",
         pattern: "${output_filename_base}.bam",
-        mode: 'copy'
+        mode: 'copy',
+        failOnError: false
 
     publishDir path: "${META.output_dir_base}/output/",
         pattern: "{mt_classification_best_results.csv,prioritized_variants.txt}",
         mode: 'copy',
-        saveAs: {"${output_filename_base}_${sanitize_string(file(it).getName())}"}
+        saveAs: {"${output_filename_base}_${sanitize_string(file(it).getName())}"},
+        failOnError: false
 
     publishDir path: "${META.output_dir_base}/output/",
         pattern: "summary*.txt",
         mode: 'copy',
-        saveAs: {"${output_filename_base}_summary.txt"}
+        saveAs: {"${output_filename_base}_summary.txt"},
+        failOnError: false
 
     publishDir path: "${META.output_dir_base}/intermediate/${task.process.replace(':', '/')}_${sample_name}/",
         enabled: params.save_intermediate_files,
         pattern: "OUT_${bamql_out.baseName}/*",
         mode: 'copy',
-        saveAs: {"OUT_${bamql_out.baseName}/${sanitize_string(file(it).getName())}"}
+        saveAs: {"OUT_${bamql_out.baseName}/${sanitize_string(file(it).getName())}"},
+        failOnError: false
 
     publishDir path: "${META.output_dir_base}/intermediate/${task.process.replace(':', '/')}_${sample_name}/",
         enabled: params.save_intermediate_files,
         pattern: "{tmp,VCF_dict_tmp,test}",
         mode: 'copy',
-        saveAs: {"${output_filename_base}_${sanitize_string(file(it).getName())}"}
+        saveAs: {"${output_filename_base}_${sanitize_string(file(it).getName())}"},
+        failOnError: false
 
     // mtoolbox folder with supplementary files
     publishDir path: "${META.output_dir_base}/intermediate/${task.process.replace(':', '/')}_${sample_name}/",
         enabled: params.save_intermediate_files,
         pattern: "*.{txt,conf,vcf,gz}",
         mode: 'copy',
-        saveAs: {"${output_filename_base}_${sanitize_string(file(it).getName())}"}
+        saveAs: {"${output_filename_base}_${sanitize_string(file(it).getName())}"},
+        failOnError: false
 
     //logs
     ext log_dir_suffix: {"/${sample_name}"},
@@ -168,18 +174,21 @@ process downsample_BAM_Picard {
 
     publishDir path: "${META.output_dir_base}/output/",
         pattern: "${output_filename_base}_downsampled.bam",
-        mode: 'copy'
+        mode: 'copy',
+        failOnError: false
 
     publishDir path: "${META.output_dir_base}/output/",
         pattern: "*.bai",
         mode: 'copy',
-        saveAs: { "${output_filename_base}_downsampled.bam.bai" }
+        saveAs: { "${output_filename_base}_downsampled.bam.bai" },
+        failOnError: false
 
     publishDir path: "${META.output_dir_base}/QC/${task.process.replace(':', '/')}_${sample_name}/",
         enabled: params.save_intermediate_files,
         pattern: "*metrics.txt",
         mode: 'copy',
-        saveAs: { "${output_filename_base}_downsampleSAM-metrics.txt" }
+        saveAs: { "${output_filename_base}_downsampleSAM-metrics.txt" },
+        failOnError: false
 
     //logs
     ext log_dir_suffix: { "/${sample_name}" }

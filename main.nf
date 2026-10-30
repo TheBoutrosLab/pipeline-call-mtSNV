@@ -1,5 +1,3 @@
-nextflow.enable.dsl=2
-
 include {
     run_validate_PipeVal as validate_input_PipeVal
     run_validate_PipeVal as validate_output_PipeVal
